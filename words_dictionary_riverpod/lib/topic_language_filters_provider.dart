@@ -11,7 +11,8 @@ class TopicLanguageFiltersProvider extends StatefulWidget {
   State<StatefulWidget> createState() => _TopicLanguageFiltersProviderState();
 }
 
-class _TopicLanguageFiltersProviderState extends State<TopicLanguageFiltersProvider> {
+class _TopicLanguageFiltersProviderState
+    extends State<TopicLanguageFiltersProvider> {
   final model = TopicLanguageFiltersModel();
 
   @override
@@ -57,10 +58,12 @@ class TopicLanguageFiltersInheritedNotifier
   }) : super(key: key, notifier: notifier, child: child);
 
   static TopicLanguageFiltersModel of(BuildContext context) {
-    final TopicLanguageFiltersInheritedNotifier? result = context
-        .dependOnInheritedWidgetOfExactType<TopicLanguageFiltersInheritedNotifier>();
+    final TopicLanguageFiltersInheritedNotifier? result =
+        context.dependOnInheritedWidgetOfExactType<
+            TopicLanguageFiltersInheritedNotifier>();
     if (result == null) {
-      throw Exception('No TopicLanguageFiltersInheritedNotifier found in context');
+      throw Exception(
+          'No TopicLanguageFiltersInheritedNotifier found in context');
     }
 
     final model = result.notifier;

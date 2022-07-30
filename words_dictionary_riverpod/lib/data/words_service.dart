@@ -38,14 +38,12 @@ final _words = [
       Language.russian: 'природа',
     },
   ),
-  Word(
-    id: 5, 
-    translations: {
-      Language.english: 'ocean',
-      Language.french: 'océan',
-      Language.german: 'ozean',
-      Language.russian: 'океан',
+  Word(id: 5, translations: {
+    Language.english: 'ocean',
+    Language.french: 'océan',
+    Language.german: 'ozean',
+    Language.russian: 'океан',
   }),
 ];
 
-List<Word> getWords() => _words;
+List<Word> getWords() => _words.toList();

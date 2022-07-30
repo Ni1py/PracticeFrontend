@@ -1,78 +1,58 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:words_dictionary_riverpod/data/topic_theme.dart';
 
-class TopicThemeFiltersProvider extends StatefulWidget {
-  const TopicThemeFiltersProvider({Key? key, required this.child})
-      : super(key: key);
+// class TopicThemeFiltersModel {
+//   TopicTheme _topicTheme = TopicTheme.black;
+//   Color _topicColor = topicColorBlack;
+//   Color _topicTextColor = topicColorWhite;
+//   Color _topicBackgroundColor = topicColorGrey;
 
-  final Widget child;
+//   Color get topicColor => _topicColor;
+//   Color get topicTextColor => _topicTextColor;
+//   Color get topicBackgroundColor => _topicBackgroundColor;
+//   TopicTheme get topicTheme => _topicTheme;
+// }
 
-  @override
-  State<StatefulWidget> createState() => _TopicThemeFiltersProviderState();
-}
+// class TopicThemeFitersNotifier extends StateNotifier<TopicThemeFiltersModel> {
+//   TopicThemeFitersNotifier() : super(TopicThemeFiltersModel());
 
-class _TopicThemeFiltersProviderState extends State<TopicThemeFiltersProvider> {
-  final model = TopicThemeFiltersModel();
+//   set topicTheme(TopicTheme value) {
+//     state._topicTheme = value;
+//     if (value == TopicTheme.black) {
+//       state._topicColor = topicColorBlack;
+//       state._topicBackgroundColor = topicColorGrey;
+//       state._topicTextColor = topicColorWhite;
+//     } else if (value == TopicTheme.white) {
+//       state._topicColor = topicColorWhite;
+//       state._topicBackgroundColor = topicColorWhite;
+//       state._topicTextColor = topicColorBlack;
+//     }
+//   }
+// }
 
-  @override
-  void dispose() {
-    model.dispose();
-    super.dispose();
-  }
+// final topicThemeProvider = StateNotifierProvider<TopicThemeFitersNotifier, TopicThemeFiltersModel>((_) {
+//   return TopicThemeFitersNotifier();
+// });
 
-  @override
-  Widget build(BuildContext context) => TopicThemeFiltersInheritedNotifier(
-        notifier: model,
-        child: widget.child,
-      );
-}
-
-class TopicThemeFiltersModel extends ChangeNotifier {
-  TopicTheme _topicTheme = TopicTheme.black;
-  Color _topicColor = topicColorBlack;
-  Color _topicTextColor = topicColorWhite;
-  Color _topicBackgroundColor = topicColorGrey;
+class TopicThemeFiltersModel {
+  TopicThemeFiltersModel(this._topicTheme, this._topicColor,
+      this._topicTextColor, this._topicBackgroundColor);
+  TopicTheme _topicTheme;
+  Color _topicColor;
+  Color _topicTextColor;
+  Color _topicBackgroundColor;
 
   Color get topicColor => _topicColor;
   Color get topicTextColor => _topicTextColor;
   Color get topicBackgroundColor => _topicBackgroundColor;
   TopicTheme get topicTheme => _topicTheme;
-  set topicTheme(TopicTheme value) {
-    _topicTheme = value;
-    if (value == TopicTheme.black) {
-      _topicColor = topicColorBlack;
-      _topicBackgroundColor = topicColorGrey;
-      _topicTextColor = topicColorWhite;
-    }
-    else if (value == TopicTheme.white) {
-      _topicColor = topicColorWhite;
-      _topicBackgroundColor = topicColorWhite;
-      _topicTextColor = topicColorBlack;
-    }
-    notifyListeners();
-  }
+  set topicTheme(TopicTheme value) => _topicTheme = value;
+  set topicColor(Color color) => _topicColor = color;
+  set topicBackgroundColor(Color color) => _topicBackgroundColor = color;
+  set topicTextColor(Color color) => _topicTextColor = color;
 }
 
-class TopicThemeFiltersInheritedNotifier
-    extends InheritedNotifier<TopicThemeFiltersModel> {
-  const TopicThemeFiltersInheritedNotifier({
-    Key? key,
-    required TopicThemeFiltersModel notifier,
-    required Widget child,
-  }) : super(key: key, notifier: notifier, child: child);
-
-  static TopicThemeFiltersModel of(BuildContext context) {
-    final TopicThemeFiltersInheritedNotifier? result = context
-        .dependOnInheritedWidgetOfExactType<TopicThemeFiltersInheritedNotifier>();
-    if (result == null) {
-      throw Exception('No TopicThemeFiltersInheritedNotifier found in context');
-    }
-
-    final model = result.notifier;
-    if (model == null) {
-      throw Exception('TopicThemeFiltersModel is null');
-    }
-
-    return model;
-  }
-}
+final topicThemeProvider = StateProvider<TopicThemeFiltersModel>((_) =>
+    TopicThemeFiltersModel(
+        TopicTheme.black, topicColorBlack, topicColorWhite, topicColorGrey));

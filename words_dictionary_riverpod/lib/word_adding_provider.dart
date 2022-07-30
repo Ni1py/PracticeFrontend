@@ -4,8 +4,7 @@ import 'package:words_dictionary_riverpod/data/word.dart';
 import 'package:words_dictionary_riverpod/data/words_service.dart';
 
 class WordAddingProvider extends StatefulWidget {
-  const WordAddingProvider({Key? key, required this.child})
-      : super(key: key);
+  const WordAddingProvider({Key? key, required this.child}) : super(key: key);
 
   final Widget child;
 
@@ -40,12 +39,15 @@ class WordAddingModel extends ChangeNotifier {
   set wordRu(String value) {
     _wordRu = value;
   }
+
   set wordEn(String value) {
     _wordEn = value;
   }
+
   set wordGe(String value) {
     _wordGe = value;
   }
+
   set wordFr(String value) {
     _wordFr = value;
   }
@@ -66,7 +68,7 @@ class WordAddingModel extends ChangeNotifier {
           Language.english: _wordEn,
           Language.german: _wordGe,
           Language.french: _wordFr,
-        }, 
+        },
         id: _words.length + 1,
       ));
       notifyListeners();
@@ -79,8 +81,7 @@ class WordAddingModel extends ChangeNotifier {
   }
 }
 
-class WordAddingInheritedNotifier
-    extends InheritedNotifier<WordAddingModel> {
+class WordAddingInheritedNotifier extends InheritedNotifier<WordAddingModel> {
   const WordAddingInheritedNotifier({
     Key? key,
     required WordAddingModel notifier,

@@ -1,99 +1,50 @@
-import 'package:flutter/widgets.dart';
-import 'package:words_dictionary_riverpod/data/words_service.dart' as words_service;
-import 'package:words_dictionary_riverpod/data/language.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:words_dictionary_riverpod/data/words_service.dart'
+    as words_service;
+import 'package:words_dictionary_riverpod/language_filters_state.dart';
 
+@immutable
+class PrintWordsModel {
+  const PrintWordsModel(this._wordIds);
+  final Set<int> _wordIds;
 
-class PrintWordsProvider extends StatefulWidget {
-  const PrintWordsProvider({Key? key, required this.child}) : super(key: key);
+  get wordIds => _wordIds;
 
-  final Widget child;
-
-  @override
-  State<StatefulWidget> createState() => PrintWordsProviderState();
-}
-
-class PrintWordsProviderState extends State<PrintWordsProvider> {
-  final model = PrintWordsProviderModel();
-
-  @override
-  void didChangeDependencies() {
-    final filters = LanguageFiltersInheritedNotifier.of(context);
-    filters.addListener(() {
-      model.wordLanguage = filters.wordLanguage;
-      model.translationLanguage = filters.translationLanguage;
-    });
-    super.didChangeDependencies();
-  }
-
-  @override
-  void dispose() {
-    model.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => PrintWordsInheritedNotifier(
-        notifier: model,
-        child: widget.child,
-      );
-}
-
-class PrintWordsProviderModel extends ChangeNotifier {
-  var wordLanguage = Language.russian;
-  var translationLanguage = Language.english;
-
-  final _wordIds = <int>{};
-  Set<int> get wordIds => _wordIds;
-
-  void printWords() {
+  void printWords(LanguageFiltersModel model) {
     final result = words_service
         .getWords()
         .where((word) => _wordIds.contains(word.id))
         .map((word) {
       final translations = word.translations;
 
-      return '${translations[wordLanguage]} - ${translations[translationLanguage]}';
+      return '${translations[model.wordLanguage]} - ${translations[model.translationLanguage]}';
     }).join("\n\r");
 
-    // ignore: avoid_print
     print(result);
   }
+}
+
+class PrintWordsNotifier extends StateNotifier<PrintWordsModel> {
+  PrintWordsNotifier() : super(PrintWordsModel(<int>{}));
 
   void addWord(int wordId) {
-    if (!_wordIds.contains(wordId)) {
-      _wordIds.add(wordId);
-      notifyListeners();
+    if (!state._wordIds.contains(wordId)) {
+      state = PrintWordsModel({...state.wordIds, wordId});
     }
   }
 
   void removeWord(int wordId) {
-    if (_wordIds.contains(wordId)) {
-      _wordIds.remove(wordId);
-      notifyListeners();
+    if (state._wordIds.contains(wordId)) {
+      state = PrintWordsModel({
+        for (final word in state._wordIds)
+          if (word != wordId) word
+      });
     }
   }
 }
 
-class PrintWordsInheritedNotifier
-    extends InheritedNotifier<PrintWordsProviderModel> {
-  const PrintWordsInheritedNotifier({
-    Key? key,
-    required PrintWordsProviderModel notifier,
-    required Widget child,
-  }) : super(key: key, notifier: notifier, child: child);
-
-  static PrintWordsProviderModel of(BuildContext context) {
-    final PrintWordsInheritedNotifier? result = context
-        .dependOnInheritedWidgetOfExactType<PrintWordsInheritedNotifier>();
-    if (result == null) {
-      throw Exception('No PrintWordsInheritedNotifier found in context');
-    }
-
-    final model = result.notifier;
-    if (model == null) {
-      throw Exception('PrintWordsProviderModel is null');
-    }
-
-    return model;
-  }
-}
+final printProvider =
+    StateNotifierProvider<PrintWordsNotifier, PrintWordsModel>((_) {
+  return PrintWordsNotifier();
+});

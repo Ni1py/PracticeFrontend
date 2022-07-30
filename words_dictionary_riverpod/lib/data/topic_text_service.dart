@@ -2,20 +2,20 @@ import 'package:words_dictionary_riverpod/data/language.dart';
 import 'package:words_dictionary_riverpod/data/topic_text.dart';
 
 final topicWordText = TopicText(
-    translations: {
-      Language.english: 'Word language:',
-      Language.french: 'Langue des mots:',
-      Language.german: 'Sprache der Wörter:',
-      Language.russian: 'Язык слов:',
-    },
+  translations: {
+    Language.english: 'Word language:',
+    Language.french: 'Langue des mots:',
+    Language.german: 'Sprache der Wörter:',
+    Language.russian: 'Язык слов:',
+  },
 );
 final topicTranslationText = TopicText(
-    translations: {
-      Language.english: 'Translation language:',
-      Language.french: 'Langue de traduction:',
-      Language.german: 'Sprache der Übersetzung:',
-      Language.russian: 'Язык перевода:',
-    },
+  translations: {
+    Language.english: 'Translation language:',
+    Language.french: 'Langue de traduction:',
+    Language.german: 'Sprache der Übersetzung:',
+    Language.russian: 'Язык перевода:',
+  },
 );
 
 final topicPrintText = TopicText(
