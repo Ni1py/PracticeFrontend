@@ -26,7 +26,7 @@ class PrintWordsModel {
 }
 
 class PrintWordsNotifier extends StateNotifier<PrintWordsModel> {
-  PrintWordsNotifier() : super(PrintWordsModel(<int>{}));
+  PrintWordsNotifier() : super(const PrintWordsModel(<int>{}));
 
   void addWord(int wordId) {
     if (!state._wordIds.contains(wordId)) {

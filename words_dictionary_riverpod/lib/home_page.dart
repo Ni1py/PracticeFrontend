@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:words_dictionary_riverpod/data/country_flags.dart';
@@ -24,43 +22,41 @@ class HomePage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24),
         child: WordAddingProvider(
-          child: TopicLanguageFiltersProvider(
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    _TopicLanguageDropDownField(),
-                    _TopicColorDropDownField(),
-                  ],
-                ),
-                const SizedBox(
-                  height: 56,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    _ButtonAdd(),
-                    _ButtonDelete(),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _WordLanguageDropdownField(),
-                    _TranslationLanguageDropdownField(),
-                    _PrintButton(),
-                  ],
-                ),
-                const SizedBox(
-                  height: 56,
-                ),
-                const WordsList(),
-              ],
-            ),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  _TopicLanguageDropDownField(),
+                  _TopicColorDropDownField(),
+                ],
+              ),
+              const SizedBox(
+                height: 56,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _ButtonAdd(),
+                  _ButtonDelete(),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _WordLanguageDropdownField(),
+                  _TranslationLanguageDropdownField(),
+                  _PrintButton(),
+                ],
+              ),
+              const SizedBox(
+                height: 56,
+              ),
+              const WordsList(),
+            ],
           ),
         ),
       ),
@@ -74,8 +70,6 @@ class _ButtonAdd extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final modelWordAdding = WordAddingInheritedNotifier.of(context);
-    final modelTopicLanguage =
-        TopicLanguageFiltersInheritedNotifier.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(right: 10),
@@ -90,17 +84,18 @@ class _ButtonAdd extends ConsumerWidget {
                 titleTextStyle: TextStyle(
                     fontSize: fontSize,
                     color: ref.watch(topicThemeProvider).topicTextColor),
-                title: Text(topicDialogTitleText
-                        .translations[modelTopicLanguage.topicLanguage] ??
+                title: Text(topicDialogTitleText.translations[ref
+                        .watch(topicLanguageFiltersProvider)
+                        .topicLanguage] ??
                     ''),
                 content: _TranslationEntryFields(
                   modelWordAdding: modelWordAdding,
-                  modelTopicLanguage: modelTopicLanguage,
+                  modelTopicLanguage: ref.watch(topicLanguageFiltersProvider),
                   modelTopicColor: ref.watch(topicThemeProvider),
                 ),
                 actions: [
                   TextButton(
-                    child: Text('OK'),
+                    child: const Text('OK'),
                     onPressed: () => {
                       Navigator.pop(context, 'OK'),
                       modelWordAdding.addWord(),
@@ -108,14 +103,16 @@ class _ButtonAdd extends ConsumerWidget {
                     },
                   ),
                   TextButton(
-                    child: Text(topicCancelButtonText
-                            .translations[modelTopicLanguage.topicLanguage] ??
+                    child: Text(topicCancelButtonText.translations[ref
+                            .watch(topicLanguageFiltersProvider)
+                            .topicLanguage] ??
                         ''),
                     onPressed: () => {
                       Navigator.pop(
                           context,
-                          topicCancelButtonText.translations[
-                                  modelTopicLanguage.topicLanguage] ??
+                          topicCancelButtonText.translations[ref
+                                  .watch(topicLanguageFiltersProvider)
+                                  .topicLanguage] ??
                               ''),
                       modelWordAdding.clear()
                     },
@@ -126,7 +123,8 @@ class _ButtonAdd extends ConsumerWidget {
           );
         },
         child: Text(
-          topicAddButtonText.translations[modelTopicLanguage.topicLanguage] ??
+          topicAddButtonText.translations[
+                  ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
               '',
           style: const TextStyle(fontSize: fontSize),
         ),
@@ -135,22 +133,20 @@ class _ButtonAdd extends ConsumerWidget {
   }
 }
 
-class _ButtonDelete extends StatelessWidget {
+class _ButtonDelete extends ConsumerWidget {
   const _ButtonDelete({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final model = WordAddingInheritedNotifier.of(context);
-    final modelTopicLanguage =
-        TopicLanguageFiltersInheritedNotifier.of(context);
 
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: ElevatedButton(
         onPressed: () => model.deleteWord(),
         child: Text(
-          topicDeleteButtonText
-                  .translations[modelTopicLanguage.topicLanguage] ??
+          topicDeleteButtonText.translations[
+                  ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
               '',
           style: const TextStyle(fontSize: fontSize),
         ),
@@ -305,15 +301,7 @@ class _TopicColorDropDownField extends ConsumerWidget {
           underline: const SizedBox(), //DropdownButtonHideUnderline
           onChanged: (TopicTheme? newValue) {
             if (newValue != null) {
-              if (newValue == TopicTheme.black) {
-                ref.read(topicThemeProvider.notifier).update((state) =>
-                    TopicThemeFiltersModel(newValue, topicColorBlack,
-                        topicColorWhite, topicColorGrey));
-              } else {
-                ref.read(topicThemeProvider.notifier).update((state) =>
-                    TopicThemeFiltersModel(newValue, topicColorWhite,
-                        topicColorBlack, topicColorWhite));
-              }
+              ref.read(topicThemeProvider.notifier).topicTheme(newValue);
             }
           },
           items: TopicTheme.values
@@ -328,23 +316,23 @@ class _TopicColorDropDownField extends ConsumerWidget {
   }
 }
 
-class _TopicLanguageDropDownField extends StatelessWidget {
+class _TopicLanguageDropDownField extends ConsumerWidget {
   const _TopicLanguageDropDownField({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final model = TopicLanguageFiltersInheritedNotifier.of(context);
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       children: [
         const SizedBox(width: 24),
         DropdownButton<Language>(
-          value: model.topicLanguage,
+          value: ref.watch(topicLanguageFiltersProvider).topicLanguage,
           elevation: 16,
           underline: const SizedBox(), //DropdownButtonHideUnderline
           onChanged: (Language? newValue) {
             if (newValue != null) {
-              model.topicLanguage = newValue;
+              ref
+                  .read(topicLanguageFiltersProvider.notifier)
+                  .topicLanguage(newValue);
             }
           },
           items: Language.values
@@ -362,12 +350,11 @@ class _TopicLanguageDropDownField extends StatelessWidget {
 class _PrintButton extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final modelTopic = TopicLanguageFiltersInheritedNotifier.of(context);
     final wordIds = ref.watch(printProvider).wordIds;
     final wordsLength = wordIds.length;
     final wordsLengthString = wordsLength == 0
         ? ''
-        : ' $wordsLength ${topicText.translations[modelTopic.topicLanguage]}';
+        : ' $wordsLength ${topicText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}';
 
     return TextButton(
       style: TextButton.styleFrom(
@@ -380,7 +367,7 @@ class _PrintButton extends ConsumerWidget {
               .watch(printProvider)
               .printWords(ref.watch(languageFiltersProvider))),
       child: Text(
-          '${topicPrintText.translations[modelTopic.topicLanguage]}$wordsLengthString'),
+          '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString'),
     );
   }
 }
@@ -388,8 +375,6 @@ class _PrintButton extends ConsumerWidget {
 class _WordLanguageDropdownField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final modelTopic = TopicLanguageFiltersInheritedNotifier.of(context);
-
     return _LanguageDropdownField(
       value: ref.watch(languageFiltersProvider).wordLanguage,
       onChanged: (Language value) => ref
@@ -398,7 +383,9 @@ class _WordLanguageDropdownField extends ConsumerWidget {
                 value,
                 state.translationLanguage,
               )),
-      label: topicWordText.translations[modelTopic.topicLanguage] ?? '',
+      label: topicWordText.translations[
+              ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
+          '',
     );
   }
 }
@@ -406,8 +393,6 @@ class _WordLanguageDropdownField extends ConsumerWidget {
 class _TranslationLanguageDropdownField extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final modelTopic = TopicLanguageFiltersInheritedNotifier.of(context);
-
     return _LanguageDropdownField(
       value: ref.watch(languageFiltersProvider).translationLanguage,
       onChanged: (Language value) => ref
@@ -416,7 +401,9 @@ class _TranslationLanguageDropdownField extends ConsumerWidget {
                 state.wordLanguage,
                 value,
               )),
-      label: topicTranslationText.translations[modelTopic.topicLanguage] ?? '',
+      label: topicTranslationText.translations[
+              ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
+          '',
     );
   }
 }
@@ -435,8 +422,6 @@ class _LanguageDropdownField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final modelTopicLanguage =
-        TopicLanguageFiltersInheritedNotifier.of(context);
 
     return Row(
       children: [
@@ -464,7 +449,7 @@ class _LanguageDropdownField extends ConsumerWidget {
           items: Language.values
               .map((Language value) => DropdownMenuItem<Language>(
                     value: value,
-                    child: Text(modelTopicLanguage.topicLanguages[value.index]),
+                    child: Text(ref.watch(topicLanguageFiltersProvider).topicLanguages[value.index]),
                   ))
               .toList(),
         ),

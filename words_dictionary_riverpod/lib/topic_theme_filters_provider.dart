@@ -2,57 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:words_dictionary_riverpod/data/topic_theme.dart';
 
-// class TopicThemeFiltersModel {
-//   TopicTheme _topicTheme = TopicTheme.black;
-//   Color _topicColor = topicColorBlack;
-//   Color _topicTextColor = topicColorWhite;
-//   Color _topicBackgroundColor = topicColorGrey;
-
-//   Color get topicColor => _topicColor;
-//   Color get topicTextColor => _topicTextColor;
-//   Color get topicBackgroundColor => _topicBackgroundColor;
-//   TopicTheme get topicTheme => _topicTheme;
-// }
-
-// class TopicThemeFitersNotifier extends StateNotifier<TopicThemeFiltersModel> {
-//   TopicThemeFitersNotifier() : super(TopicThemeFiltersModel());
-
-//   set topicTheme(TopicTheme value) {
-//     state._topicTheme = value;
-//     if (value == TopicTheme.black) {
-//       state._topicColor = topicColorBlack;
-//       state._topicBackgroundColor = topicColorGrey;
-//       state._topicTextColor = topicColorWhite;
-//     } else if (value == TopicTheme.white) {
-//       state._topicColor = topicColorWhite;
-//       state._topicBackgroundColor = topicColorWhite;
-//       state._topicTextColor = topicColorBlack;
-//     }
-//   }
-// }
-
-// final topicThemeProvider = StateNotifierProvider<TopicThemeFitersNotifier, TopicThemeFiltersModel>((_) {
-//   return TopicThemeFitersNotifier();
-// });
-
+@immutable
 class TopicThemeFiltersModel {
-  TopicThemeFiltersModel(this._topicTheme, this._topicColor,
+  const TopicThemeFiltersModel(this._topicTheme, this._topicColor,
       this._topicTextColor, this._topicBackgroundColor);
-  TopicTheme _topicTheme;
-  Color _topicColor;
-  Color _topicTextColor;
-  Color _topicBackgroundColor;
+  final TopicTheme _topicTheme;
+  final Color _topicColor;
+  final Color _topicTextColor;
+  final Color _topicBackgroundColor;
 
   Color get topicColor => _topicColor;
   Color get topicTextColor => _topicTextColor;
   Color get topicBackgroundColor => _topicBackgroundColor;
   TopicTheme get topicTheme => _topicTheme;
-  set topicTheme(TopicTheme value) => _topicTheme = value;
-  set topicColor(Color color) => _topicColor = color;
-  set topicBackgroundColor(Color color) => _topicBackgroundColor = color;
-  set topicTextColor(Color color) => _topicTextColor = color;
 }
 
-final topicThemeProvider = StateProvider<TopicThemeFiltersModel>((_) =>
-    TopicThemeFiltersModel(
-        TopicTheme.black, topicColorBlack, topicColorWhite, topicColorGrey));
+class TopicThemeFiltersNotifier extends StateNotifier<TopicThemeFiltersModel> {
+  TopicThemeFiltersNotifier()
+      : super(const TopicThemeFiltersModel(TopicTheme.black, topicColorBlack,
+            topicColorWhite, topicColorGrey));
+
+  void topicTheme(TopicTheme theme) {
+    if (theme == TopicTheme.black) {
+      state = const TopicThemeFiltersModel(
+          TopicTheme.black, topicColorBlack, topicColorWhite, topicColorGrey);
+    } else {
+      state = const TopicThemeFiltersModel(
+          TopicTheme.white, topicColorWhite, topicColorBlack, topicColorWhite);
+    }
+  }
+}
+
+final topicThemeProvider =
+    StateNotifierProvider<TopicThemeFiltersNotifier, TopicThemeFiltersModel>(
+        (_) => TopicThemeFiltersNotifier());
