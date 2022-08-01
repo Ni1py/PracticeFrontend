@@ -23,10 +23,14 @@ class MyApp extends StatelessWidget {
                     end: Alignment.bottomRight,
                     colors: <Color>[
                   Color.fromARGB(255, 138, 10, 161),
-                  Color.fromARGB(255, 205, 12, 66)
+                  Color.fromARGB(255, 12, 184, 87)
                 ])),
           ),
           title: const Text('Words Dictionary'),
+          actions: [
+            TopicLanguageDropDownField(),
+            TopicColorDropDownField(),
+          ],
         ),
         body: const HomePage(),
       ),

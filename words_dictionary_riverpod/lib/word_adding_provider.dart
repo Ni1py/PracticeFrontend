@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:words_dictionary_riverpod/data/language.dart';
 import 'package:words_dictionary_riverpod/data/word.dart';
@@ -8,7 +7,7 @@ class WordAddingModel {
   WordAddingModel(this._words);
 
   final List<Word> _words;
-  get words => _words;
+  List<Word> get words => _words;
 }
 
 class WordAddingNotifier extends StateNotifier<WordAddingModel> {
@@ -51,12 +50,14 @@ class WordAddingNotifier extends StateNotifier<WordAddingModel> {
     }
   }
 
-  void deleteWord() =>
+  void deleteWord() {
     state = WordAddingModel([
-      for (final word in state._words) {
-        if (word.id != state._words.length) { //тут остановился
-          word;
-        }
-      }
+      for (var word in state._words)
+        if (word.id != state._words.length) word
     ]);
+  }
 }
+
+final wordAddingProvider =
+    StateNotifierProvider<WordAddingNotifier, WordAddingModel>(
+        (_) => WordAddingNotifier());

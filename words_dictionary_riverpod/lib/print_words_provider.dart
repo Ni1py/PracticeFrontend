@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:words_dictionary_riverpod/data/words_service.dart'
-    as words_service;
+import 'package:words_dictionary_riverpod/data/word.dart';
 import 'package:words_dictionary_riverpod/language_filters_state.dart';
 
 @immutable
@@ -9,13 +8,11 @@ class PrintWordsModel {
   const PrintWordsModel(this._wordIds);
   final Set<int> _wordIds;
 
-  get wordIds => _wordIds;
+  Set<int> get wordIds => _wordIds;
 
-  void printWords(LanguageFiltersModel model) {
-    final result = words_service
-        .getWords()
-        .where((word) => _wordIds.contains(word.id))
-        .map((word) {
+  void printWords(LanguageFiltersModel model, List<Word> words) {
+    final result =
+        words.where((word) => _wordIds.contains(word.id)).map((word) {
       final translations = word.translations;
 
       return '${translations[model.wordLanguage]} - ${translations[model.translationLanguage]}';

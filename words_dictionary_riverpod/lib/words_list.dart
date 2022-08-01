@@ -13,27 +13,29 @@ class WordsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final modelWords = WordAddingInheritedNotifier.of(context);
-
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: modelWords.words.length,
+      itemCount: ref.watch(wordAddingProvider).words.length,
       itemBuilder: (_, index) {
-        final word = modelWords.words[index];
+        final word = ref.watch(wordAddingProvider).words[index];
 
         return Row(
           children: [
             Expanded(
                 flex: 6,
                 child: _NativeLanguageWord(
-                    word: word, color: ref.watch(topicThemeProvider).topicTextColor)),
+                    word: word,
+                    color: ref.watch(topicThemeProvider).topicTextColor)),
             Expanded(
                 flex: 6,
                 child: _StudiedLanguageWord(
-                    word: word, color: ref.watch(topicThemeProvider).topicTextColor)),
+                    word: word,
+                    color: ref.watch(topicThemeProvider).topicTextColor)),
             Expanded(
                 flex: 1,
-                child: _WordCheckbox(word: word, modelTopicColor: ref.watch(topicThemeProvider))),
+                child: _WordCheckbox(
+                    word: word,
+                    modelTopicColor: ref.watch(topicThemeProvider))),
           ],
         );
       },

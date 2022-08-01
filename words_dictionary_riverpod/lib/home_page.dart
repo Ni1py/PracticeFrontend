@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:words_dictionary_riverpod/data/country_flags.dart';
 import 'package:words_dictionary_riverpod/data/language.dart';
 import 'package:words_dictionary_riverpod/data/topic_color_containers.dart';
+import 'package:words_dictionary_riverpod/data/topic_text.dart';
 import 'package:words_dictionary_riverpod/data/topic_text_service.dart';
 import 'package:words_dictionary_riverpod/data/topic_theme.dart';
 import 'package:words_dictionary_riverpod/language_filters_state.dart';
@@ -21,43 +22,34 @@ class HomePage extends StatelessWidget {
     return _ContainerBackground(
       child: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24),
-        child: WordAddingProvider(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  _TopicLanguageDropDownField(),
-                  _TopicColorDropDownField(),
-                ],
-              ),
-              const SizedBox(
-                height: 56,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _ButtonAdd(),
-                  _ButtonDelete(),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _WordLanguageDropdownField(),
-                  _TranslationLanguageDropdownField(),
-                  _PrintButton(),
-                ],
-              ),
-              const SizedBox(
-                height: 56,
-              ),
-              const WordsList(),
-            ],
-          ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 56,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _ButtonAdd(),
+                _ButtonDelete(),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _WordLanguageDropdownField(),
+                _TranslationLanguageDropdownField(),
+                _PrintButton(),
+              ],
+            ),
+            const SizedBox(
+              height: 56,
+            ),
+            const WordsList(),
+          ],
         ),
       ),
     );
@@ -69,8 +61,6 @@ class _ButtonAdd extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final modelWordAdding = WordAddingInheritedNotifier.of(context);
-
     return Padding(
       padding: const EdgeInsets.only(right: 10),
       child: ElevatedButton(
@@ -89,17 +79,15 @@ class _ButtonAdd extends ConsumerWidget {
                         .topicLanguage] ??
                     ''),
                 content: _TranslationEntryFields(
-                  modelWordAdding: modelWordAdding,
-                  modelTopicLanguage: ref.watch(topicLanguageFiltersProvider),
-                  modelTopicColor: ref.watch(topicThemeProvider),
+                  wordAddingNotifier: ref.watch(wordAddingProvider.notifier),
                 ),
                 actions: [
                   TextButton(
                     child: const Text('OK'),
                     onPressed: () => {
                       Navigator.pop(context, 'OK'),
-                      modelWordAdding.addWord(),
-                      modelWordAdding.clear()
+                      ref.read(wordAddingProvider.notifier).addWord(),
+                      ref.read(wordAddingProvider.notifier).clear()
                     },
                   ),
                   TextButton(
@@ -114,7 +102,7 @@ class _ButtonAdd extends ConsumerWidget {
                                   .watch(topicLanguageFiltersProvider)
                                   .topicLanguage] ??
                               ''),
-                      modelWordAdding.clear()
+                      ref.read(wordAddingProvider.notifier).clear()
                     },
                   ),
                 ],
@@ -138,12 +126,15 @@ class _ButtonDelete extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = WordAddingInheritedNotifier.of(context);
-
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: ElevatedButton(
-        onPressed: () => model.deleteWord(),
+        onPressed: () {
+          ref
+              .read(printProvider.notifier)
+              .removeWord(ref.watch(wordAddingProvider).words.length);
+          ref.read(wordAddingProvider.notifier).deleteWord();
+        },
         child: Text(
           topicDeleteButtonText.translations[
                   ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
@@ -155,119 +146,71 @@ class _ButtonDelete extends ConsumerWidget {
   }
 }
 
-class _TranslationEntryFields extends StatelessWidget {
-  const _TranslationEntryFields(
-      {Key? key,
-      required this.modelWordAdding,
-      required this.modelTopicLanguage,
-      required this.modelTopicColor})
+class AlertDialogTextField extends ConsumerWidget {
+  const AlertDialogTextField(
+      {Key? key, required this.hintContent, this.onChanged})
       : super(key: key);
 
-  final WordAddingModel modelWordAdding;
-  final TopicLanguageFiltersModel modelTopicLanguage;
-  final TopicThemeFiltersModel modelTopicColor;
+  final TopicText hintContent;
+  final Function(String)? onChanged;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    return TextField(
+      style: TextStyle(color: ref.watch(topicThemeProvider).topicTextColor),
+      decoration: InputDecoration(
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: ref.watch(topicThemeProvider).topicTextColor, width: 1),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+                color: ref.watch(topicThemeProvider).topicTextColor, width: 1),
+          ),
+          hintText: hintContent.translations[
+                  ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
+              '',
+          hintStyle:
+              TextStyle(color: ref.watch(topicThemeProvider).topicTextColor),
+          fillColor: ref.watch(topicThemeProvider).topicColor,
+          filled: true),
+      onChanged: onChanged,
+    );
+  }
+}
+
+class _TranslationEntryFields extends StatelessWidget {
+  const _TranslationEntryFields({Key? key, required this.wordAddingNotifier})
+      : super(key: key);
+
+  final WordAddingNotifier wordAddingNotifier;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        TextField(
-          style: TextStyle(color: modelTopicColor.topicTextColor),
-          decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide:
-                    BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-              ),
-              hintText: topicInputRuText
-                      .translations[modelTopicLanguage.topicLanguage] ??
-                  '',
-              hintStyle: TextStyle(color: modelTopicColor.topicTextColor),
-              fillColor: modelTopicColor.topicColor,
-              filled: true),
-          onChanged: (text) {
-            modelWordAdding.wordRu = text;
-          },
-        ),
+        AlertDialogTextField(
+            hintContent: topicInputRuText,
+            onChanged: ((String text) => wordAddingNotifier.wordRu = text)),
         const SizedBox(
           height: 20,
         ),
-        TextField(
-          style: TextStyle(color: modelTopicColor.topicTextColor),
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-            ),
-            hintText: topicInputEnText
-                    .translations[modelTopicLanguage.topicLanguage] ??
-                '',
-            hintStyle: TextStyle(color: modelTopicColor.topicTextColor),
-            fillColor: modelTopicColor.topicColor,
-            filled: true,
-          ),
-          onChanged: (text) {
-            modelWordAdding.wordEn = text;
-          },
-        ),
+        AlertDialogTextField(
+            hintContent: topicInputEnText,
+            onChanged: ((String text) => wordAddingNotifier.wordEn = text)),
         const SizedBox(
           height: 20,
         ),
-        TextField(
-          style: TextStyle(color: modelTopicColor.topicTextColor),
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-            ),
-            hintText: topicInputGeText
-                    .translations[modelTopicLanguage.topicLanguage] ??
-                '',
-            hintStyle: TextStyle(color: modelTopicColor.topicTextColor),
-            fillColor: modelTopicColor.topicColor,
-            filled: true,
-          ),
-          onChanged: (text) {
-            modelWordAdding.wordGe = text;
-          },
-        ),
+        AlertDialogTextField(
+            hintContent: topicInputGeText,
+            onChanged: ((String text) => wordAddingNotifier.wordGe = text)),
         const SizedBox(
           height: 20,
         ),
-        TextField(
-          style: TextStyle(color: modelTopicColor.topicTextColor),
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: modelTopicColor.topicTextColor, width: 1),
-            ),
-            hintText: topicInputFrText
-                    .translations[modelTopicLanguage.topicLanguage] ??
-                '',
-            hintStyle: TextStyle(color: modelTopicColor.topicTextColor),
-            fillColor: modelTopicColor.topicColor,
-            filled: true,
-          ),
-          onChanged: (text) {
-            modelWordAdding.wordFr = text;
-          },
-        ),
+        AlertDialogTextField(
+            hintContent: topicInputFrText,
+            onChanged: ((String text) => wordAddingNotifier.wordFr = text)),
       ],
     );
   }
@@ -287,8 +230,8 @@ class _ContainerBackground extends ConsumerWidget {
   }
 }
 
-class _TopicColorDropDownField extends ConsumerWidget {
-  const _TopicColorDropDownField({Key? key}) : super(key: key);
+class TopicColorDropDownField extends ConsumerWidget {
+  const TopicColorDropDownField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -316,8 +259,8 @@ class _TopicColorDropDownField extends ConsumerWidget {
   }
 }
 
-class _TopicLanguageDropDownField extends ConsumerWidget {
-  const _TopicLanguageDropDownField({Key? key}) : super(key: key);
+class TopicLanguageDropDownField extends ConsumerWidget {
+  const TopicLanguageDropDownField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -363,9 +306,9 @@ class _PrintButton extends ConsumerWidget {
       ),
       onPressed: () => ((wordsLength == 0)
           ? null
-          : ref
-              .watch(printProvider)
-              .printWords(ref.watch(languageFiltersProvider))),
+          : ref.watch(printProvider).printWords(
+              ref.watch(languageFiltersProvider),
+              ref.watch(wordAddingProvider).words)),
       child: Text(
           '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString'),
     );
@@ -422,7 +365,6 @@ class _LanguageDropdownField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     return Row(
       children: [
         Text(
@@ -449,7 +391,9 @@ class _LanguageDropdownField extends ConsumerWidget {
           items: Language.values
               .map((Language value) => DropdownMenuItem<Language>(
                     value: value,
-                    child: Text(ref.watch(topicLanguageFiltersProvider).topicLanguages[value.index]),
+                    child: Text(ref
+                        .watch(topicLanguageFiltersProvider)
+                        .topicLanguages[value.index]),
                   ))
               .toList(),
         ),
