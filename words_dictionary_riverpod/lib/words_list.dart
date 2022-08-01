@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:words_dictionary_riverpod/data/word.dart';
 import 'package:words_dictionary_riverpod/language_filters_state.dart';
 import 'package:words_dictionary_riverpod/print_words_provider.dart';
-//import 'package:words_dictionary_riverpod/print_words_provider.dart';
 import 'package:words_dictionary_riverpod/style.dart';
 import 'package:words_dictionary_riverpod/topic_theme_filters_provider.dart';
 import 'package:words_dictionary_riverpod/word_adding_provider.dart';
@@ -13,32 +12,34 @@ class WordsList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: ref.watch(wordAddingProvider).words.length,
-      itemBuilder: (_, index) {
-        final word = ref.watch(wordAddingProvider).words[index];
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: ref.watch(wordAddingProvider).words.length,
+        itemBuilder: (_, index) {
+          final word = ref.watch(wordAddingProvider).words[index];
 
-        return Row(
-          children: [
-            Expanded(
-                flex: 6,
-                child: _NativeLanguageWord(
-                    word: word,
-                    color: ref.watch(topicThemeProvider).topicTextColor)),
-            Expanded(
-                flex: 6,
-                child: _StudiedLanguageWord(
-                    word: word,
-                    color: ref.watch(topicThemeProvider).topicTextColor)),
-            Expanded(
-                flex: 1,
-                child: _WordCheckbox(
-                    word: word,
-                    modelTopicColor: ref.watch(topicThemeProvider))),
-          ],
-        );
-      },
+          return Row(
+            children: [
+              Expanded(
+                  flex: 6,
+                  child: _NativeLanguageWord(
+                      word: word,
+                      color: ref.watch(topicThemeProvider).topicTextColor)),
+              Expanded(
+                  flex: 6,
+                  child: _StudiedLanguageWord(
+                      word: word,
+                      color: ref.watch(topicThemeProvider).topicTextColor)),
+              Expanded(
+                  flex: 1,
+                  child: _WordCheckbox(
+                      word: word,
+                      modelTopicColor: ref.watch(topicThemeProvider))),
+            ],
+          );
+        },
+      ),
     );
   }
 }
