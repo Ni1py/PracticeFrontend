@@ -1,14 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main.dart';
+part of 'button_delete_small.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+class ButtonDeleteSmall extends ConsumerWidget {
+  const ButtonDeleteSmall({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => myApp(_context, _ref);
+  Widget build(BuildContext _context, WidgetRef _ref) =>
+      buttonDeleteSmall(_context, _ref);
 }

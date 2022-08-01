@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:words_dictionary_codogeneration/data/word.dart';
-import 'package:words_dictionary_codogeneration/language_filters_state.dart';
+import 'package:words_dictionary_codogeneration/providers/language_filters_provider.dart';
 
 @immutable
 class PrintWordsModel {

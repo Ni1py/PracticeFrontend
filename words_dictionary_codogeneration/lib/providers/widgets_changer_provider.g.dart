@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main.dart';
+part of 'widgets_changer_provider.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+class EmptyContainer extends StatelessWidget {
+  const EmptyContainer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => myApp(_context, _ref);
+  Widget build(BuildContext _context) => emptyContainer();
 }

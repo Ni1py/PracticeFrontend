@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:words_dictionary_codogeneration/data/word.dart';
-import 'package:words_dictionary_codogeneration/language_filters_state.dart';
-import 'package:words_dictionary_codogeneration/print_words_provider.dart';
-import 'package:words_dictionary_codogeneration/style.dart';
-import 'package:words_dictionary_codogeneration/topic_theme_filters_provider.dart';
-import 'package:words_dictionary_codogeneration/word_adding_provider.dart';
+import 'package:words_dictionary_codogeneration/providers/language_filters_provider.dart';
+import 'package:words_dictionary_codogeneration/providers/print_words_provider.dart';
+import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
+import 'package:words_dictionary_codogeneration/providers/word_adding_provider.dart';
+import 'package:words_dictionary_codogeneration/styles/style.dart';
 
 part 'words_list.g.dart';
 

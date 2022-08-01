@@ -1,14 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'main.dart';
+part of 'button_add.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+class ButtonAdd extends ConsumerWidget {
+  const ButtonAdd({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => myApp(_context, _ref);
+  Widget build(BuildContext _context, WidgetRef _ref) =>
+      buttonAdd(_context, _ref);
 }
