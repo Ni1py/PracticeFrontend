@@ -8,17 +8,19 @@ part 'row_medium_filters_and_dictionary_printing.g.dart';
 
 @swidget
 Widget rowMediumFiltersAndDictionaryPrinting(BuildContext context) {
-  return Row(
+  return Column(
     children: [
-      Expanded(child: WordMediumLanguageDropdownField()),
+      Row(children: [
+        Expanded(child: WordMediumLanguageDropdownField()),
+        const SizedBox(
+          width: 15,
+        ),
+        Expanded(child: TranslationMediumLanguageDropdownField()),
+      ]),
       const SizedBox(
-        width: 15,
+        height: 20,
       ),
-      Expanded(child: TranslationMediumLanguageDropdownField()),
-      const SizedBox(
-        width: 15,
-      ),
-      Expanded(child: PrintButton()),
+      PrintButton(),
     ],
   );
 }

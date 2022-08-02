@@ -11,7 +11,9 @@ part 'translation_large_language_drop_down_field.g.dart';
 
 @cwidget
 Widget translationLargeLanguageDropdownField(
-    BuildContext context, WidgetRef ref) {
+  BuildContext context,
+  WidgetRef ref,
+) {
   return LanguageLargeDropdownField(
     topicTranslationText.translations[
             ref.watch(topicLanguageFiltersProvider).topicLanguage] ??

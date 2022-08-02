@@ -12,7 +12,10 @@ part 'widgets_changer_provider.g.dart';
 @immutable
 class WidgetsChangerModel {
   const WidgetsChangerModel(
-      this._drawer, this._homePageButtonWord, this._homePageDropDownButtons);
+    this._drawer,
+    this._homePageButtonWord,
+    this._homePageDropDownButtons,
+  );
   final _drawer;
   final Widget _homePageButtonWord;
   final Widget _homePageDropDownButtons;
@@ -24,26 +27,39 @@ class WidgetsChangerModel {
 
 class WidgetsChangerNotifier extends StateNotifier<WidgetsChangerModel> {
   WidgetsChangerNotifier()
-      : super(const WidgetsChangerModel(null, RowDictionaryControlButtons(),
-            RowLargeFiltersAndDictionaryPrinting()));
+      : super(const WidgetsChangerModel(
+          null,
+          RowDictionaryControlButtons(),
+          RowLargeFiltersAndDictionaryPrinting(),
+        ));
 
   void changeWidgetsInTree(double width) {
     if (width < 600) {
       state = const WidgetsChangerModel(
-          MyDrawer(), ColumnDictionaryControlButtons(), EmptyContainer());
+        MyDrawer(),
+        ColumnDictionaryControlButtons(),
+        EmptyContainer(),
+      );
     } else if (width < 1100) {
-      state = const WidgetsChangerModel(null, RowDictionaryControlButtons(),
-          RowMediumFiltersAndDictionaryPrinting());
+      state = const WidgetsChangerModel(
+        null,
+        RowDictionaryControlButtons(),
+        RowMediumFiltersAndDictionaryPrinting(),
+      );
     } else {
-      state = const WidgetsChangerModel(null, RowDictionaryControlButtons(),
-          RowLargeFiltersAndDictionaryPrinting());
+      state = const WidgetsChangerModel(
+        null,
+        RowDictionaryControlButtons(),
+        RowLargeFiltersAndDictionaryPrinting(),
+      );
     }
   }
 }
 
 final widgetsChangerProvider =
     StateNotifierProvider<WidgetsChangerNotifier, WidgetsChangerModel>(
-        (_) => WidgetsChangerNotifier());
+  (_) => WidgetsChangerNotifier(),
+);
 
 @swidget
 Widget emptyContainer() {

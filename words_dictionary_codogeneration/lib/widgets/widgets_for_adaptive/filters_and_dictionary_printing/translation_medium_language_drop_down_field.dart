@@ -11,7 +11,9 @@ part 'translation_medium_language_drop_down_field.g.dart';
 
 @cwidget
 Widget translationMediumLanguageDropdownField(
-    BuildContext context, WidgetRef ref) {
+  BuildContext context,
+  WidgetRef ref,
+) {
   return LanguageMediumDropdownField(
     topicTranslationText.translations[
             ref.watch(topicLanguageFiltersProvider).topicLanguage] ??

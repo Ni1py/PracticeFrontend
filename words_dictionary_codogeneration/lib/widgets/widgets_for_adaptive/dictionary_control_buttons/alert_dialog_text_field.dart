@@ -8,26 +8,34 @@ import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_pr
 part 'alert_dialog_text_field.g.dart';
 
 @cwidget
-Widget alertDialogTextField(BuildContext context, WidgetRef ref,
-    TopicText hintContent, Function(String)? onChanged) {
+Widget alertDialogTextField(
+  BuildContext context,
+  WidgetRef ref,
+  TopicText hintContent,
+  Function(String)? onChanged,
+) {
   return TextField(
     style: TextStyle(color: ref.watch(topicThemeProvider).topicTextColor),
     decoration: InputDecoration(
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: ref.watch(topicThemeProvider).topicTextColor, width: 1),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: ref.watch(topicThemeProvider).topicTextColor,
+          width: 1,
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-              color: ref.watch(topicThemeProvider).topicTextColor, width: 1),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(
+          color: ref.watch(topicThemeProvider).topicTextColor,
+          width: 1,
         ),
-        hintText: hintContent.translations[
-                ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-            '',
-        hintStyle:
-            TextStyle(color: ref.watch(topicThemeProvider).topicTextColor),
-        fillColor: ref.watch(topicThemeProvider).topicColor,
-        filled: true),
+      ),
+      hintText: hintContent.translations[
+              ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
+          '',
+      hintStyle: TextStyle(color: ref.watch(topicThemeProvider).topicTextColor),
+      fillColor: ref.watch(topicThemeProvider).topicColor,
+      filled: true,
+    ),
     onChanged: onChanged,
   );
 }

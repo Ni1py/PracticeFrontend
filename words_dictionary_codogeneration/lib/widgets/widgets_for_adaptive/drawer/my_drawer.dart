@@ -9,14 +9,17 @@ part 'my_drawer.g.dart';
 Widget myDrawer(BuildContext context, WidgetRef ref) {
   return Drawer(
     child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
-              Color.fromARGB(255, 138, 10, 161),
-              Color.fromARGB(255, 12, 184, 87)
-            ])),
-        child: const ColumnFiltersAndDictionaryPrinting()),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: <Color>[
+            Color.fromARGB(255, 138, 10, 161),
+            Color.fromARGB(255, 12, 184, 87),
+          ],
+        ),
+      ),
+      child: const ColumnFiltersAndDictionaryPrinting(),
+    ),
   );
 }

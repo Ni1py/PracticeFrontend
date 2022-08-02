@@ -12,21 +12,25 @@ part 'my_scaffold.g.dart';
 Widget myScaffold(BuildContext context, WidgetRef ref) {
   final mediaQueryData = MediaQuery.of(context);
   Future.microtask(
-      () => ref.read(widgetsChangerProvider.notifier).changeWidgetsInTree(mediaQueryData.size.width),
-    );
+    () => ref
+        .read(widgetsChangerProvider.notifier)
+        .changeWidgetsInTree(mediaQueryData.size.width),
+  );
 
   return Scaffold(
     drawer: ref.watch(widgetsChangerProvider).drawer,
     appBar: AppBar(
       flexibleSpace: Container(
         decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: <Color>[
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: <Color>[
               Color.fromARGB(255, 138, 10, 161),
-              Color.fromARGB(255, 12, 184, 87)
-            ])),
+              Color.fromARGB(255, 12, 184, 87),
+            ],
+          ),
+        ),
       ),
       title: const Text('Words Dictionary'),
       actions: [

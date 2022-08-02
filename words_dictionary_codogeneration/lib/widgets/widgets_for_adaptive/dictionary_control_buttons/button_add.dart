@@ -13,27 +13,25 @@ part 'button_add.g.dart';
 Widget buttonAdd(BuildContext context, WidgetRef ref) {
   return Padding(
     padding: const EdgeInsets.only(right: 10),
-    child: Container(
-      color: ref.watch(topicThemeProvider).topicButtonColor,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-            primary: ref.watch(topicThemeProvider).topicButtonColor),
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return const MyAlertDialog();
-            },
-          );
-        },
-        child: Text(
-          topicAddButtonText.translations[
-                  ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-              '',
-          style: const TextStyle(
-            fontSize: fontSize,
-            // color: ref.watch(topicThemeProvider).topicButtonTextColor),
-          ),
+    child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        primary: ref.watch(topicThemeProvider).topicButtonColor,
+      ),
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return const MyAlertDialog();
+          },
+        );
+      },
+      child: Text(
+        topicAddButtonText.translations[
+                ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
+            '',
+        style: TextStyle(
+          fontSize: fontSize,
+          color: ref.watch(topicThemeProvider).topicButtonTextColor,
         ),
       ),
     ),

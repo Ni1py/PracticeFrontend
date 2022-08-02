@@ -25,19 +25,19 @@ class WordAddingNotifier extends StateNotifier<WordAddingModel> {
             Language.french: wordFr,
           },
           id: state._words.length + 1,
-        )
+        ),
       ]);
     }
   }
 
   void deleteWord() {
     state = WordAddingModel([
-      for (var word in state._words)
-        if (word.id != state._words.length) word
+      ...state.words.where((w) => w.id != state._words.length),
     ]);
   }
 }
 
 final wordAddingProvider =
     StateNotifierProvider<WordAddingNotifier, WordAddingModel>(
-        (_) => WordAddingNotifier());
+  (_) => WordAddingNotifier(),
+);

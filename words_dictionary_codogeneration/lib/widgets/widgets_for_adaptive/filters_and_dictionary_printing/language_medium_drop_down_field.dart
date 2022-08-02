@@ -9,16 +9,22 @@ import 'package:words_dictionary_codogeneration/styles/style.dart';
 part 'language_medium_drop_down_field.g.dart';
 
 @cwidget
-Widget languageMediumDropdownField(BuildContext context, WidgetRef ref,
-    String label, Language value, ValueChanged<Language> onChanged) {
+Widget languageMediumDropdownField(
+  BuildContext context,
+  WidgetRef ref,
+  String label,
+  Language value,
+  ValueChanged<Language> onChanged,
+) {
   return Column(
     children: [
       FittedBox(
         child: Text(
           label,
           style: TextStyle(
-              fontSize: fontSize,
-              color: ref.watch(topicThemeProvider).topicTextColor),
+            fontSize: fontSize,
+            color: ref.watch(topicThemeProvider).topicTextColor,
+          ),
         ),
       ),
       const SizedBox(width: 24),
@@ -26,10 +32,13 @@ Widget languageMediumDropdownField(BuildContext context, WidgetRef ref,
         value: value,
         icon: const Icon(Icons.arrow_downward),
         elevation: 16,
-        style: const TextStyle(color: Colors.deepPurple, fontSize: fontSize),
+        style: TextStyle(
+          color: ref.watch(topicThemeProvider).topicButtonColor,
+          fontSize: fontSize,
+        ),
         underline: Container(
           height: 2,
-          color: Colors.deepPurpleAccent,
+          color: ref.watch(topicThemeProvider).topicButtonTextColor,
         ),
         onChanged: (Language? newValue) {
           if (newValue != null) {

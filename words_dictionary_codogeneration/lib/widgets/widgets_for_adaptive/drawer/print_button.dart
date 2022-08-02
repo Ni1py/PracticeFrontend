@@ -21,14 +21,16 @@ Widget printButton(BuildContext context, WidgetRef ref) {
 
   return Container(
     decoration: const BoxDecoration(
-        gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: <Color>[
-              Color.fromARGB(255, 172, 34, 147),
-              Color.fromARGB(255, 12, 184, 87)
-            ]),
-        borderRadius: BorderRadius.all(Radius.circular(10))),
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: <Color>[
+          Color.fromARGB(255, 172, 34, 147),
+          Color.fromARGB(255, 12, 184, 87),
+        ],
+      ),
+      borderRadius: BorderRadius.all(Radius.circular(10)),
+    ),
     child: TextButton(
       style: TextButton.styleFrom(
         primary: ref.watch(topicThemeProvider).topicTextColor,
@@ -37,13 +39,15 @@ Widget printButton(BuildContext context, WidgetRef ref) {
       onPressed: () {
         (wordsLength == 0)
             ? null
-            : ref.watch(printProvider).printWords(
-                ref.watch(languageFiltersProvider),
-                ref.watch(wordAddingProvider).words);
+            : ref.read(printProvider).printWords(
+                  ref.read(languageFiltersProvider),
+                  ref.read(wordAddingProvider).words,
+                );
         Navigator.pop(context);
       },
       child: Text(
-          '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString'),
+        '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString',
+      ),
     ),
   );
 }

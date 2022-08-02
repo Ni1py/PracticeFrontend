@@ -9,7 +9,6 @@ void main() => runApp(const ProviderScope(child: MyApp()));
 
 @cwidget
 Widget myApp(BuildContext context, WidgetRef ref) {
-
   return MaterialApp(
     title: 'Flutter Demo',
     theme: ThemeData(

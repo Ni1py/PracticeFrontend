@@ -22,16 +22,23 @@ Widget wordsList(BuildContext context, WidgetRef ref) {
         return Row(
           children: [
             Expanded(
-                flex: 6,
-                child: NativeLanguageWord(
-                    word, ref.watch(topicThemeProvider).topicTextColor)),
+              flex: 6,
+              child: NativeLanguageWord(
+                word,
+                ref.watch(topicThemeProvider).topicTextColor,
+              ),
+            ),
             Expanded(
-                flex: 6,
-                child: StudiedLanguageWord(
-                    word, ref.watch(topicThemeProvider).topicTextColor)),
+              flex: 6,
+              child: StudiedLanguageWord(
+                word,
+                ref.watch(topicThemeProvider).topicTextColor,
+              ),
+            ),
             Expanded(
-                flex: 1,
-                child: WordCheckbox(word, ref.watch(topicThemeProvider))),
+              flex: 1,
+              child: WordCheckbox(word, ref.watch(topicThemeProvider)),
+            ),
           ],
         );
       },
@@ -41,7 +48,11 @@ Widget wordsList(BuildContext context, WidgetRef ref) {
 
 @cwidget
 Widget nativeLanguageWord(
-    BuildContext context, WidgetRef ref, Word word, Color color) {
+  BuildContext context,
+  WidgetRef ref,
+  Word word,
+  Color color,
+) {
   return Text(
     word.translations[ref.watch(languageFiltersProvider).wordLanguage] ?? '',
     style: TextStyle(fontSize: fontSize, color: color),
@@ -50,7 +61,11 @@ Widget nativeLanguageWord(
 
 @cwidget
 Widget studiedLanguageWord(
-    BuildContext context, WidgetRef ref, Word word, Color color) {
+  BuildContext context,
+  WidgetRef ref,
+  Word word,
+  Color color,
+) {
   return Text(
     word.translations[ref.watch(languageFiltersProvider).translationLanguage] ??
         '',
@@ -59,12 +74,17 @@ Widget studiedLanguageWord(
 }
 
 @cwidget
-Widget wordCheckbox(BuildContext context, WidgetRef ref, Word word,
-    TopicThemeFiltersModel modelTopicColor) {
+Widget wordCheckbox(
+  BuildContext context,
+  WidgetRef ref,
+  Word word,
+  TopicThemeFiltersModel modelTopicColor,
+) {
   return Checkbox(
     checkColor: modelTopicColor.topicColor,
     fillColor: MaterialStateProperty.resolveWith<Color>(
-        (states) => modelTopicColor.topicTextColor),
+      (states) => modelTopicColor.topicTextColor,
+    ),
     value: ref.watch(printProvider).wordIds.contains(word.id),
     onChanged: (value) => ((value ?? false)
         ? ref.read(printProvider.notifier).addWord

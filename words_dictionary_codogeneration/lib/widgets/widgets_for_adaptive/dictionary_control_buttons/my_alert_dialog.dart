@@ -21,33 +21,13 @@ Widget myAlertDialog(BuildContext context, WidgetRef ref) {
   return AlertDialog(
     backgroundColor: ref.watch(topicThemeProvider).topicBackgroundColor,
     titleTextStyle: TextStyle(
-        fontSize: fontSize,
-        color: ref.watch(topicThemeProvider).topicTextColor),
+      fontSize: fontSize,
+      color: ref.watch(topicThemeProvider).topicTextColor,
+    ),
     title: Text(topicDialogTitleText.translations[
             ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
         ''),
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        AlertDialogTextField(
-            topicInputRuText, ((String text) => wordRu.value = text)),
-        const SizedBox(
-          height: 20,
-        ),
-        AlertDialogTextField(
-            topicInputEnText, ((String text) => wordEn.value = text)),
-        const SizedBox(
-          height: 20,
-        ),
-        AlertDialogTextField(
-            topicInputGeText, ((String text) => wordGe.value = text)),
-        const SizedBox(
-          height: 20,
-        ),
-        AlertDialogTextField(
-            topicInputFrText, ((String text) => wordFr.value = text)),
-      ],
-    ),
+    content: TranslationEntryFields(wordRu, wordEn, wordGe, wordFr),
     actions: [
       TextButton(
         child: const Text('OK'),
@@ -64,11 +44,52 @@ Widget myAlertDialog(BuildContext context, WidgetRef ref) {
             ''),
         onPressed: () => {
           Navigator.pop(
-              context,
-              topicCancelButtonText.translations[
-                      ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-                  ''),
+            context,
+            topicCancelButtonText.translations[
+                    ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
+                '',
+          ),
         },
+      ),
+    ],
+  );
+}
+
+@swidget
+Widget translationEntryFields(
+  BuildContext context,
+  ValueNotifier<String> wordRu,
+  ValueNotifier<String> wordEn,
+  ValueNotifier<String> wordGe,
+  ValueNotifier<String> wordFr,
+) {
+  return Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      AlertDialogTextField(
+        topicInputRuText,
+        ((String text) => wordRu.value = text),
+      ),
+      const SizedBox(
+        height: 20,
+      ),
+      AlertDialogTextField(
+        topicInputEnText,
+        ((String text) => wordEn.value = text),
+      ),
+      const SizedBox(
+        height: 20,
+      ),
+      AlertDialogTextField(
+        topicInputGeText,
+        ((String text) => wordGe.value = text),
+      ),
+      const SizedBox(
+        height: 20,
+      ),
+      AlertDialogTextField(
+        topicInputFrText,
+        ((String text) => wordFr.value = text),
       ),
     ],
   );

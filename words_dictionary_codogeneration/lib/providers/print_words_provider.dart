@@ -35,7 +35,7 @@ class PrintWordsNotifier extends StateNotifier<PrintWordsModel> {
     if (state._wordIds.contains(wordId)) {
       state = PrintWordsModel({
         for (final word in state._wordIds)
-          if (word != wordId) word
+          if (word != wordId) word,
       });
     }
   }

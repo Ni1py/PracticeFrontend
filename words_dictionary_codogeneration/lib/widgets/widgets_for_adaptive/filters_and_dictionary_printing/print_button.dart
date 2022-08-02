@@ -27,9 +27,11 @@ Widget printButton(BuildContext context, WidgetRef ref) {
     onPressed: () => ((wordsLength == 0)
         ? null
         : ref.watch(printProvider).printWords(
-            ref.watch(languageFiltersProvider),
-            ref.watch(wordAddingProvider).words)),
+              ref.watch(languageFiltersProvider),
+              ref.watch(wordAddingProvider).words,
+            )),
     child: Text(
-        '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString'),
+      '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString',
+    ),
   );
 }
