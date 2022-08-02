@@ -4,6 +4,7 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:words_dictionary_codogeneration/data/topic_text_service.dart';
 import 'package:words_dictionary_codogeneration/providers/print_words_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_language_filters_provider.dart';
+import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/word_adding_provider.dart';
 import 'package:words_dictionary_codogeneration/styles/style.dart';
 
@@ -14,6 +15,8 @@ Widget buttonDelete(BuildContext context, WidgetRef ref) {
   return Padding(
     padding: const EdgeInsets.only(left: 10),
     child: ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          primary: ref.watch(topicThemeProvider).topicButtonColor),
       onPressed: () {
         ref
             .read(printProvider.notifier)
