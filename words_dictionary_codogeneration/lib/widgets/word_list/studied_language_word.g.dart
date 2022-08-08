@@ -1,15 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'my_scaffold.dart';
+part of 'studied_language_word.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class MyScaffold extends ConsumerWidget {
-  const MyScaffold({Key? key}) : super(key: key);
+class StudiedLanguageWord extends ConsumerWidget {
+  const StudiedLanguageWord(this.word, this.color, {Key? key})
+      : super(key: key);
+
+  final Word word;
+
+  final Color color;
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      myScaffold(_context, _ref);
+      _studiedLanguageWord(_ref, word, color);
 }

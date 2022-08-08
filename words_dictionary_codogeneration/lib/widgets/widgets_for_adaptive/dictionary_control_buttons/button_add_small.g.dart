@@ -11,5 +11,5 @@ class ButtonAddSmall extends ConsumerWidget {
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      buttonAddSmall(_context, _ref);
+      _buttonAddSmall(_context, _ref);
 }

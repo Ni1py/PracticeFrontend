@@ -11,5 +11,5 @@ class RowLargeFiltersAndDictionaryPrinting extends StatelessWidget {
 
   @override
   Widget build(BuildContext _context) =>
-      rowLargeFiltersAndDictionaryPrinting(_context);
+      _rowLargeFiltersAndDictionaryPrinting();
 }

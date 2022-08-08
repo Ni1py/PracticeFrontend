@@ -11,5 +11,5 @@ class TranslationMediumLanguageDropdownField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      translationMediumLanguageDropdownField(_context, _ref);
+      _translationMediumLanguageDropdownField(_ref);
 }

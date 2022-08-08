@@ -11,5 +11,5 @@ class PrintButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      printButton(_context, _ref);
+      _printButton(_context, _ref);
 }

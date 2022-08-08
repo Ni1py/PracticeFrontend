@@ -8,7 +8,7 @@ import 'package:words_dictionary_codogeneration/providers/topic_language_filters
 part 'topic_language_drop_down_field.g.dart';
 
 @cwidget
-Widget topicLanguageDropDownField(BuildContext context, WidgetRef ref) {
+Widget _topicLanguageDropDownField(WidgetRef ref) {
   return Row(
     children: [
       const SizedBox(width: 24),

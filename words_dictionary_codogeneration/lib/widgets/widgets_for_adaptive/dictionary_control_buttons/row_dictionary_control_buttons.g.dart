@@ -10,5 +10,5 @@ class RowDictionaryControlButtons extends StatelessWidget {
   const RowDictionaryControlButtons({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context) => rowDictionaryControlButtons();
+  Widget build(BuildContext _context) => _rowDictionaryControlButtons();
 }

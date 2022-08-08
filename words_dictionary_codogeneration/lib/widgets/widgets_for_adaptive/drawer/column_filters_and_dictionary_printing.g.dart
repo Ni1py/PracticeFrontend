@@ -10,6 +10,5 @@ class ColumnFiltersAndDictionaryPrinting extends StatelessWidget {
   const ColumnFiltersAndDictionaryPrinting({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context) =>
-      columnFiltersAndDictionaryPrinting(_context);
+  Widget build(BuildContext _context) => _columnFiltersAndDictionaryPrinting();
 }

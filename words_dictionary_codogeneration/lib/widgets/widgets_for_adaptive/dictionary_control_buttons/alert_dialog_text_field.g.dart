@@ -16,5 +16,5 @@ class AlertDialogTextField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      alertDialogTextField(_context, _ref, hintContent, onChanged);
+      _alertDialogTextField(_ref, hintContent, onChanged);
 }

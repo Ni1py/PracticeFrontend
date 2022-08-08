@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:words_dictionary_codogeneration/providers/widgets_changer_provider.dart';
+import 'package:words_dictionary_codogeneration/providers/display_mode_provider.dart';
 import 'package:words_dictionary_codogeneration/widgets/appbar_drop_down_fieds/topic_color_drop_down_field.dart';
 import 'package:words_dictionary_codogeneration/widgets/appbar_drop_down_fieds/topic_language_drop_down_field.dart';
-import 'package:words_dictionary_codogeneration/widgets/home_page.dart';
+import 'package:words_dictionary_codogeneration/widgets/adaptive_home_page.dart';
+import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/drawer/my_drawer.dart';
 
-part 'my_scaffold.g.dart';
+part 'adaptive_scaffold.g.dart';
 
-@cwidget
-Widget myScaffold(BuildContext context, WidgetRef ref) {
-  final mediaQueryData = MediaQuery.of(context);
-  Future.microtask(
-    () => ref
-        .read(widgetsChangerProvider.notifier)
-        .changeWidgetsInTree(mediaQueryData.size.width),
-  );
+@swidget
+Widget _adaptiveScaffold(BuildContext context) {
+  return DisplayModeProvider.of(context) == DisplayMode.mobile
+      ? DefaultScaffold(MyDrawer())
+      : DefaultScaffold(null);
+}
 
+@swidget
+Widget _defaultScaffold(Widget? drawer) {
   return Scaffold(
-    drawer: ref.watch(widgetsChangerProvider).drawer,
+    drawer: drawer,
     appBar: AppBar(
       flexibleSpace: Container(
         decoration: const BoxDecoration(
@@ -38,6 +38,6 @@ Widget myScaffold(BuildContext context, WidgetRef ref) {
         TopicColorDropDownField(),
       ],
     ),
-    body: const HomePage(),
+    body: const AdaptiveHomePage(),
   );
 }

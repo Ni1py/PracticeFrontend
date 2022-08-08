@@ -11,7 +11,7 @@ class MyAlertDialog extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      myAlertDialog(_context, _ref);
+      _myAlertDialog(_context, _ref);
 }
 
 class TranslationEntryFields extends StatelessWidget {
@@ -30,5 +30,5 @@ class TranslationEntryFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext _context) =>
-      translationEntryFields(_context, wordRu, wordEn, wordGe, wordFr);
+      _translationEntryFields(wordRu, wordEn, wordGe, wordFr);
 }

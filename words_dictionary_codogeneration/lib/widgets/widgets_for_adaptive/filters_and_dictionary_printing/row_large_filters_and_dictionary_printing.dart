@@ -7,7 +7,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/fil
 part 'row_large_filters_and_dictionary_printing.g.dart';
 
 @swidget
-Widget rowLargeFiltersAndDictionaryPrinting(BuildContext context) {
+Widget _rowLargeFiltersAndDictionaryPrinting() {
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [

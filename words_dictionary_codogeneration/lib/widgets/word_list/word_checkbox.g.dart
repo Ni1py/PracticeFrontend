@@ -1,15 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'button_delete_small.dart';
+part of 'word_checkbox.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class ButtonDeleteSmall extends ConsumerWidget {
-  const ButtonDeleteSmall({Key? key}) : super(key: key);
+class WordCheckbox extends ConsumerWidget {
+  const WordCheckbox(this.word, this.modelTopicColor, {Key? key})
+      : super(key: key);
+
+  final Word word;
+
+  final TopicThemeFiltersModel modelTopicColor;
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      buttonDeleteSmall(_context, _ref);
+      _wordCheckbox(_ref, word, modelTopicColor);
 }

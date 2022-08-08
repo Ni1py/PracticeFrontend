@@ -1,17 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'home_page.dart';
+part of 'default_home_page.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class HomePage extends ConsumerWidget {
-  const HomePage({Key? key}) : super(key: key);
+class DefaultHomePage extends StatelessWidget {
+  const DefaultHomePage(this.homePageButtons, this.homePageDropDownButtons,
+      {Key? key})
+      : super(key: key);
+
+  final Widget homePageButtons;
+
+  final Widget homePageDropDownButtons;
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      homePage(_context, _ref);
+  Widget build(BuildContext _context) =>
+      _defaultHomePage(homePageButtons, homePageDropDownButtons);
 }
 
 class ContainerBackground extends ConsumerWidget {
@@ -21,5 +27,5 @@ class ContainerBackground extends ConsumerWidget {
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      containerBackground(_context, _ref, child);
+      _containerBackground(_ref, child);
 }

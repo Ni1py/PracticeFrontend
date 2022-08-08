@@ -10,10 +10,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/fil
 part 'translation_medium_language_drop_down_field.g.dart';
 
 @cwidget
-Widget translationMediumLanguageDropdownField(
-  BuildContext context,
-  WidgetRef ref,
-) {
+Widget _translationMediumLanguageDropdownField(WidgetRef ref) {
   return LanguageMediumDropdownField(
     topicTranslationText.translations[
             ref.watch(topicLanguageFiltersProvider).topicLanguage] ??

@@ -10,6 +10,5 @@ class MyDrawer extends ConsumerWidget {
   const MyDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      myDrawer(_context, _ref);
+  Widget build(BuildContext _context, WidgetRef _ref) => _myDrawer(_ref);
 }

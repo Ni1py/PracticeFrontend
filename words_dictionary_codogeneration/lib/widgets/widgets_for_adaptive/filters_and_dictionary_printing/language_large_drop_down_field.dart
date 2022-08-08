@@ -9,8 +9,7 @@ import 'package:words_dictionary_codogeneration/styles/style.dart';
 part 'language_large_drop_down_field.g.dart';
 
 @cwidget
-Widget languageLargeDropdownField(
-  BuildContext context,
+Widget _languageLargeDropdownField(
   WidgetRef ref,
   String label,
   Language value,

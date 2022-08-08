@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'widgets_changer_provider.dart';
+part of 'adaptive_home_page.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class EmptyContainer extends StatelessWidget {
-  const EmptyContainer({Key? key}) : super(key: key);
+class AdaptiveHomePage extends StatelessWidget {
+  const AdaptiveHomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context) => emptyContainer();
+  Widget build(BuildContext _context) => _adaptiveHomePage(_context);
 }

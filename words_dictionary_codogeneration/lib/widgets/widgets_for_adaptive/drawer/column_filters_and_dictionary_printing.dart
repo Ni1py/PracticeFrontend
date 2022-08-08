@@ -7,7 +7,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/dra
 part 'column_filters_and_dictionary_printing.g.dart';
 
 @swidget
-Widget columnFiltersAndDictionaryPrinting(BuildContext context) {
+Widget _columnFiltersAndDictionaryPrinting() {
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,

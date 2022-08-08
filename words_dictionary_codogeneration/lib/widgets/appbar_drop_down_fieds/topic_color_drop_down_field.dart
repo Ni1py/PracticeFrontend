@@ -8,7 +8,7 @@ import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_pr
 part 'topic_color_drop_down_field.g.dart';
 
 @cwidget
-Widget topicColorDropDownField(BuildContext context, WidgetRef ref) {
+Widget _topicColorDropDownField(WidgetRef ref) {
   return Row(
     children: [
       const SizedBox(width: 24),

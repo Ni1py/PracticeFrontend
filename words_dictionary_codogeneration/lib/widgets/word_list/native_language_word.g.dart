@@ -1,15 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'translation_language_drop_down_field.dart';
+part of 'native_language_word.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class TranslationLanguageDropdownField extends ConsumerWidget {
-  const TranslationLanguageDropdownField({Key? key}) : super(key: key);
+class NativeLanguageWord extends ConsumerWidget {
+  const NativeLanguageWord(this.word, this.color, {Key? key}) : super(key: key);
+
+  final Word word;
+
+  final Color color;
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      _translationLanguageDropdownField(_context, _ref);
+      _nativeLanguageWord(_ref, word, color);
 }

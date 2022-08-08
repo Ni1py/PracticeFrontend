@@ -12,7 +12,7 @@ import 'package:words_dictionary_codogeneration/styles/style.dart';
 part 'print_button.g.dart';
 
 @cwidget
-Widget printButton(BuildContext context, WidgetRef ref) {
+Widget _printButton(BuildContext context, WidgetRef ref) {
   final wordIds = ref.watch(printProvider).wordIds;
   final wordsLength = wordIds.length;
   final wordsLengthString = wordsLength == 0

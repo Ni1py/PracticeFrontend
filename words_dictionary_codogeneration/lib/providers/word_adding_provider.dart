@@ -30,9 +30,9 @@ class WordAddingNotifier extends StateNotifier<WordAddingModel> {
     }
   }
 
-  void deleteWord() {
+  void deleteWord(int index) {
     state = WordAddingModel([
-      ...state.words.where((w) => w.id != state._words.length),
+      ...state.words.where((w) => w.id != index),
     ]);
   }
 }

@@ -9,8 +9,7 @@ import 'package:words_dictionary_codogeneration/styles/style.dart';
 part 'language_drop_down_field.g.dart';
 
 @cwidget
-Widget languageDropdownField(
-  BuildContext context,
+Widget _languageDropdownField(
   WidgetRef ref,
   String label,
   Language value,
@@ -47,8 +46,7 @@ Widget languageDropdownField(
 }
 
 @cwidget
-Widget myDropDownButton(
-  BuildContext context,
+Widget _myDropDownButton(
   WidgetRef ref,
   Language value,
   ValueChanged<Language> onChanged,

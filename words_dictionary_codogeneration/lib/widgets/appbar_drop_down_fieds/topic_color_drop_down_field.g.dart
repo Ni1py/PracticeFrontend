@@ -11,5 +11,5 @@ class TopicColorDropDownField extends ConsumerWidget {
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      topicColorDropDownField(_context, _ref);
+      _topicColorDropDownField(_ref);
 }

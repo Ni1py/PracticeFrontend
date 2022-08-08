@@ -10,7 +10,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/dic
 part 'button_add_small.g.dart';
 
 @cwidget
-Widget buttonAddSmall(BuildContext context, WidgetRef ref) {
+Widget _buttonAddSmall(BuildContext context, WidgetRef ref) {
   return Padding(
     padding: const EdgeInsets.only(bottom: 10),
     child: ElevatedButton(

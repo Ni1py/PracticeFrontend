@@ -45,15 +45,6 @@ final topicAddButtonText = TopicText(
   },
 );
 
-final topicDeleteButtonText = TopicText(
-  translations: {
-    Language.english: 'Delete word',
-    Language.french: 'Supprimer le mot',
-    Language.german: 'Wort löschen',
-    Language.russian: 'Удалить слово',
-  },
-);
-
 final topicDialogTitleText = TopicText(
   translations: {
     Language.english: 'Adding the word',

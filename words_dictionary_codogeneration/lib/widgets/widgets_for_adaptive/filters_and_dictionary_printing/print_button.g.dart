@@ -10,6 +10,5 @@ class PrintButton extends ConsumerWidget {
   const PrintButton({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      printButton(_context, _ref);
+  Widget build(BuildContext _context, WidgetRef _ref) => _printButton(_ref);
 }

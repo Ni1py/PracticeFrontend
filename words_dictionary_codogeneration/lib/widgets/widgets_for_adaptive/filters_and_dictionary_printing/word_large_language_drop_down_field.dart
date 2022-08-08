@@ -10,7 +10,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/fil
 part 'word_large_language_drop_down_field.g.dart';
 
 @cwidget
-Widget wordLargeLanguageDropdownField(BuildContext context, WidgetRef ref) {
+Widget _wordLargeLanguageDropdownField(WidgetRef ref) {
   return LanguageLargeDropdownField(
     topicWordText.translations[
             ref.watch(topicLanguageFiltersProvider).topicLanguage] ??

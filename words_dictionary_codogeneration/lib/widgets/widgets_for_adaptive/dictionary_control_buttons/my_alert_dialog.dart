@@ -12,7 +12,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/dic
 part 'my_alert_dialog.g.dart';
 
 @hcwidget
-Widget myAlertDialog(BuildContext context, WidgetRef ref) {
+Widget _myAlertDialog(BuildContext context, WidgetRef ref) {
   final wordRu = useState('');
   final wordEn = useState('');
   final wordGe = useState('');
@@ -56,8 +56,7 @@ Widget myAlertDialog(BuildContext context, WidgetRef ref) {
 }
 
 @swidget
-Widget translationEntryFields(
-  BuildContext context,
+Widget _translationEntryFields(
   ValueNotifier<String> wordRu,
   ValueNotifier<String> wordEn,
   ValueNotifier<String> wordGe,

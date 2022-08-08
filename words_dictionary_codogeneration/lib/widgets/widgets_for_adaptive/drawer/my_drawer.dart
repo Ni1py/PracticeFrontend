@@ -6,7 +6,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/dra
 part 'my_drawer.g.dart';
 
 @cwidget
-Widget myDrawer(BuildContext context, WidgetRef ref) {
+Widget _myDrawer(WidgetRef ref) {
   return Drawer(
     child: Container(
       decoration: const BoxDecoration(

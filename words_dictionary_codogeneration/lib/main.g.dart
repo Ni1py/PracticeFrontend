@@ -6,9 +6,9 @@ part of 'main.dart';
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class MyApp extends ConsumerWidget {
-  const MyApp({Key? key}) : super(key: key);
+class WordDictionaryApp extends StatelessWidget {
+  const WordDictionaryApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) => myApp(_context, _ref);
+  Widget build(BuildContext _context) => _wordDictionaryApp(_context);
 }

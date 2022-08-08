@@ -7,7 +7,7 @@ import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/fil
 part 'row_medium_filters_and_dictionary_printing.g.dart';
 
 @swidget
-Widget rowMediumFiltersAndDictionaryPrinting(BuildContext context) {
+Widget _rowMediumFiltersAndDictionaryPrinting() {
   return Column(
     children: [
       Row(children: [

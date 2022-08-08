@@ -8,8 +8,7 @@ import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_pr
 part 'alert_dialog_text_field.g.dart';
 
 @cwidget
-Widget alertDialogTextField(
-  BuildContext context,
+Widget _alertDialogTextField(
   WidgetRef ref,
   TopicText hintContent,
   Function(String)? onChanged,
