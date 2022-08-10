@@ -1,15 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'button_add_small.dart';
+part of 'default_drawer.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class ButtonAddSmall extends ConsumerWidget {
-  const ButtonAddSmall({Key? key}) : super(key: key);
+class DefaultDrawer extends ConsumerWidget {
+  const DefaultDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      _buttonAddSmall(_context, _ref);
+  Widget build(BuildContext _context, WidgetRef _ref) => _defaultDrawer(_ref);
 }

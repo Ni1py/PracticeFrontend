@@ -1,20 +1,20 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'alert_dialog_text_field.dart';
+part of 'translation_form_text_field.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class AlertDialogTextField extends ConsumerWidget {
-  const AlertDialogTextField(this.hintContent, this.onChanged, {Key? key})
+class TranslationFormTextField extends ConsumerWidget {
+  const TranslationFormTextField(this.hintContent, this.onChanged, {Key? key})
       : super(key: key);
 
-  final TopicText hintContent;
+  final Word hintContent;
 
   final dynamic Function(String)? onChanged;
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      _alertDialogTextField(_ref, hintContent, onChanged);
+      _translationFormTextField(_ref, hintContent, onChanged);
 }

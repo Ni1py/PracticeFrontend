@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:words_dictionary_codogeneration/data/country_flags.dart';
 import 'package:words_dictionary_codogeneration/data/language.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_language_filters_provider.dart';
+import 'package:words_dictionary_codogeneration/widgets/data_widgets/country_flags.dart';
 
 part 'topic_language_drop_down_field.g.dart';
 

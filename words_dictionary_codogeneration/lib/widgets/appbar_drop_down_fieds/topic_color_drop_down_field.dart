@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:words_dictionary_codogeneration/data/topic_color_containers.dart';
 import 'package:words_dictionary_codogeneration/data/topic_theme.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
+import 'package:words_dictionary_codogeneration/widgets/data_widgets/topic_color_containers.dart';
 
 part 'topic_color_drop_down_field.g.dart';
 

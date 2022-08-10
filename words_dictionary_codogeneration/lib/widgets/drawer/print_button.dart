@@ -7,7 +7,9 @@ import 'package:words_dictionary_codogeneration/providers/print_words_provider.d
 import 'package:words_dictionary_codogeneration/providers/topic_language_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/word_adding_provider.dart';
+import 'package:words_dictionary_codogeneration/styles/drawer_box_decoration.dart';
 import 'package:words_dictionary_codogeneration/styles/style.dart';
+import 'package:words_dictionary_codogeneration/styles/text_style_general.dart';
 
 part 'print_button.g.dart';
 
@@ -20,21 +22,11 @@ Widget _printButton(BuildContext context, WidgetRef ref) {
       : ' $wordsLength ${topicText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}';
 
   return Container(
-    decoration: const BoxDecoration(
-      gradient: LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: <Color>[
-          Color.fromARGB(255, 172, 34, 147),
-          Color.fromARGB(255, 12, 184, 87),
-        ],
-      ),
-      borderRadius: BorderRadius.all(Radius.circular(10)),
-    ),
+    decoration: drawerBoxDecoration(),
     child: TextButton(
       style: TextButton.styleFrom(
         primary: ref.watch(topicThemeProvider).topicTextColor,
-        textStyle: const TextStyle(fontSize: fontSize),
+        textStyle: textStyleGeneral(null),
       ),
       onPressed: () {
         (wordsLength == 0)

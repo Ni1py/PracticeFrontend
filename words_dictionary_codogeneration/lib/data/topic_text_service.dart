@@ -1,7 +1,8 @@
 import 'package:words_dictionary_codogeneration/data/language.dart';
-import 'package:words_dictionary_codogeneration/data/topic_text.dart';
+import 'package:words_dictionary_codogeneration/data/word.dart';
 
-final topicWordText = TopicText(
+final topicWordText = Word(
+  id: 0,
   translations: {
     Language.english: 'Word language:',
     Language.french: 'Langue des mots:',
@@ -9,7 +10,8 @@ final topicWordText = TopicText(
     Language.russian: 'Язык слов:',
   },
 );
-final topicTranslationText = TopicText(
+final topicTranslationText = Word(
+  id: 0,
   translations: {
     Language.english: 'Translation language:',
     Language.french: 'Langue de traduction:',
@@ -18,7 +20,8 @@ final topicTranslationText = TopicText(
   },
 );
 
-final topicPrintText = TopicText(
+final topicPrintText = Word(
+  id: 0,
   translations: {
     Language.english: 'Print',
     Language.french: 'Imprimer',
@@ -27,7 +30,8 @@ final topicPrintText = TopicText(
   },
 );
 
-final topicText = TopicText(
+final topicText = Word(
+  id: 0,
   translations: {
     Language.english: 'words',
     Language.french: 'mots',
@@ -36,7 +40,8 @@ final topicText = TopicText(
   },
 );
 
-final topicAddButtonText = TopicText(
+final topicAddButtonText = Word(
+  id: 0,
   translations: {
     Language.english: 'Add a word',
     Language.french: 'Ajouter un mot',
@@ -45,7 +50,8 @@ final topicAddButtonText = TopicText(
   },
 );
 
-final topicDialogTitleText = TopicText(
+final topicDialogTitleText = Word(
+  id: 0,
   translations: {
     Language.english: 'Adding the word',
     Language.french: 'En ajoutant le mot',
@@ -54,7 +60,8 @@ final topicDialogTitleText = TopicText(
   },
 );
 
-final topicInputRuText = TopicText(
+final topicInputRuText = Word(
+  id: 0,
   translations: {
     Language.english: 'Enter the Russian version',
     Language.french: 'Entrez la version russe',
@@ -63,7 +70,8 @@ final topicInputRuText = TopicText(
   },
 );
 
-final topicInputEnText = TopicText(
+final topicInputEnText = Word(
+  id: 0,
   translations: {
     Language.english: 'Enter the English version',
     Language.french: 'Entrer la version anglaise',
@@ -72,7 +80,8 @@ final topicInputEnText = TopicText(
   },
 );
 
-final topicInputGeText = TopicText(
+final topicInputGeText = Word(
+  id: 0,
   translations: {
     Language.english: 'Enter the German version',
     Language.french: 'Entrer la version allemande',
@@ -81,7 +90,8 @@ final topicInputGeText = TopicText(
   },
 );
 
-final topicInputFrText = TopicText(
+final topicInputFrText = Word(
+  id: 0,
   translations: {
     Language.english: 'Enter the French version',
     Language.french: 'Entrer la version française',
@@ -90,7 +100,8 @@ final topicInputFrText = TopicText(
   },
 );
 
-final topicCancelButtonText = TopicText(
+final topicCancelButtonText = Word(
+  id: 0,
   translations: {
     Language.english: 'Cancel',
     Language.french: 'Annulez',

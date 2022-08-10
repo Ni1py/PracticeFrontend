@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/drawer/print_button.dart';
-import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/drawer/translation_language_drop_down_field.dart';
-import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/drawer/word_language_drop_down_field.dart';
+import 'package:gap/gap.dart';
+import 'package:words_dictionary_codogeneration/widgets/drawer/print_button.dart';
+import 'package:words_dictionary_codogeneration/widgets/drawer/translation_language_drop_down_field.dart';
+import 'package:words_dictionary_codogeneration/widgets/drawer/word_language_drop_down_field.dart';
 
 part 'column_filters_and_dictionary_printing.g.dart';
 
@@ -13,9 +14,9 @@ Widget _columnFiltersAndDictionaryPrinting() {
       mainAxisSize: MainAxisSize.min,
       children: [
         WordLanguageDropdownField(),
-        const SizedBox(height: 20),
+        const Gap(20),
         TranslationLanguageDropdownField(),
-        const SizedBox(height: 20),
+        const Gap(20),
         PrintButton(),
       ],
     ),

@@ -7,7 +7,7 @@ import 'package:words_dictionary_codogeneration/providers/print_words_provider.d
 import 'package:words_dictionary_codogeneration/providers/topic_language_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/word_adding_provider.dart';
-import 'package:words_dictionary_codogeneration/styles/style.dart';
+import 'package:words_dictionary_codogeneration/styles/text_style_general.dart';
 
 part 'print_button.g.dart';
 
@@ -22,7 +22,7 @@ Widget _printButton(WidgetRef ref) {
   return TextButton(
     style: TextButton.styleFrom(
       primary: ref.watch(topicThemeProvider).topicTextColor,
-      textStyle: const TextStyle(fontSize: fontSize),
+      textStyle: textStyleGeneral(null),
     ),
     onPressed: () => ((wordsLength == 0)
         ? null

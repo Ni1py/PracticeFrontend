@@ -5,23 +5,23 @@ import 'package:words_dictionary_codogeneration/data/language.dart';
 import 'package:words_dictionary_codogeneration/data/topic_text_service.dart';
 import 'package:words_dictionary_codogeneration/providers/language_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_language_filters_provider.dart';
-import 'package:words_dictionary_codogeneration/widgets/widgets_for_adaptive/drawer/language_drop_down_field.dart';
+import 'package:words_dictionary_codogeneration/widgets/drawer/language_drop_down_field.dart';
 
-part 'word_language_drop_down_field.g.dart';
+part 'translation_language_drop_down_field.g.dart';
 
 @cwidget
-Widget _wordLanguageDropdownField(BuildContext context, WidgetRef ref) {
+Widget _translationLanguageDropdownField(BuildContext context, WidgetRef ref) {
   return LanguageDropdownField(
-    topicWordText.translations[
+    topicTranslationText.translations[
             ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
         '',
-    ref.watch(languageFiltersProvider).wordLanguage,
+    ref.watch(languageFiltersProvider).translationLanguage,
     (Language value) {
       ref
           .read(languageFiltersProvider.notifier)
           .update((state) => LanguageFiltersModel(
+                state.wordLanguage,
                 value,
-                state.translationLanguage,
               ));
       Navigator.pop(context);
     },

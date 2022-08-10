@@ -21,16 +21,3 @@ class LanguageDropdownField extends ConsumerWidget {
   Widget build(BuildContext _context, WidgetRef _ref) =>
       _languageDropdownField(_ref, label, value, onChanged);
 }
-
-class MyDropDownButton extends ConsumerWidget {
-  const MyDropDownButton(this.value, this.onChanged, {Key? key})
-      : super(key: key);
-
-  final Language value;
-
-  final void Function(Language) onChanged;
-
-  @override
-  Widget build(BuildContext _context, WidgetRef _ref) =>
-      _myDropDownButton(_ref, value, onChanged);
-}

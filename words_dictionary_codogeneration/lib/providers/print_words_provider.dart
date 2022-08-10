@@ -33,10 +33,7 @@ class PrintWordsNotifier extends StateNotifier<PrintWordsModel> {
 
   void removeWord(int wordId) {
     if (state._wordIds.contains(wordId)) {
-      state = PrintWordsModel({
-        for (final word in state._wordIds)
-          if (word != wordId) word,
-      });
+      state = PrintWordsModel({...state._wordIds.where((w) => w != wordId)});
     }
   }
 }

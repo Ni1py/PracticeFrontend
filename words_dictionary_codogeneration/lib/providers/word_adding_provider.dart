@@ -13,18 +13,24 @@ class WordAddingModel {
 class WordAddingNotifier extends StateNotifier<WordAddingModel> {
   WordAddingNotifier() : super(WordAddingModel(getWords()));
 
-  void addWord(String wordRu, String wordEn, String wordGe, String wordFr) {
-    if (wordRu != '' && wordEn != '' && wordGe != '' && wordFr != '') {
+  int _getMaxId() {
+    return (state._words.map((word) => word.id).toList())
+        .reduce((value, element) => value > element ? value : element);
+  }
+
+  String _isMapElementEmpty(Map<Language, String> translations) {
+    return translations.values
+        .toList()
+        .reduce((value, element) => value.isEmpty ? 'true' : 'false');
+  }
+
+  void addWord(Map<Language, String> translations) {
+    if (_isMapElementEmpty(translations) == 'false') {
       state = WordAddingModel([
         ...state._words,
         Word(
-          translations: {
-            Language.russian: wordRu,
-            Language.english: wordEn,
-            Language.german: wordGe,
-            Language.french: wordFr,
-          },
-          id: state._words.length + 1,
+          translations: translations,
+          id: _getMaxId() + 1,
         ),
       ]);
     }

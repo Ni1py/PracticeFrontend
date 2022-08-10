@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
+import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/widgets/word_list/words_list.dart';
@@ -16,17 +17,11 @@ Widget _defaultHomePage(
       padding: const EdgeInsets.only(left: 24, right: 24),
       child: Column(
         children: [
-          const SizedBox(
-            height: 56,
-          ),
+          const Gap(56),
           homePageButtons,
-          const SizedBox(
-            height: 20,
-          ),
+          const Gap(20),
           homePageDropDownButtons,
-          const SizedBox(
-            height: 56,
-          ),
+          const Gap(56),
           const WordsList(),
         ],
       ),
