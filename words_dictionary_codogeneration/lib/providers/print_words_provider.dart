@@ -11,14 +11,14 @@ class PrintWordsModel {
   Set<int> get wordIds => _wordIds;
 
   void printWords(LanguageFiltersModel model, List<Word> words) {
-    final result =
+    final _result =
         words.where((word) => _wordIds.contains(word.id)).map((word) {
-      final translations = word.translations;
+      final _translations = word.translations;
 
-      return '${translations[model.wordLanguage]} - ${translations[model.translationLanguage]}';
+      return '${_translations[model.wordLanguage]} - ${_translations[model.translationLanguage]}';
     }).join("\n\r");
 
-    print(result);
+    print(_result);
   }
 }
 

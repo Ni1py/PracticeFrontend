@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'word_medium_language_drop_down_field.dart';
+part of 'filters_and_dictionary_printing.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class WordMediumLanguageDropdownField extends ConsumerWidget {
-  const WordMediumLanguageDropdownField({Key? key}) : super(key: key);
+class FiltersAndDictionaryPrinting extends ConsumerWidget {
+  const FiltersAndDictionaryPrinting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext _context, WidgetRef _ref) =>
-      _wordMediumLanguageDropdownField(_ref);
+      _filtersAndDictionaryPrinting(_ref);
 }

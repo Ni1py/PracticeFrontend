@@ -17,17 +17,15 @@ Widget _languageDropdownField(
   Language value,
   ValueChanged<Language> onChanged,
 ) {
-  return Container(
+  final _theme = ref.watch(topicThemeProvider).topicTextColor;
+
+  return DecoratedBox(
     decoration: drawerBoxDecoration(),
     child: Column(
       children: [
-        FittedBox(
-          child: Text(
-            label,
-            style: textStyleGeneral(
-              ref.watch(topicThemeProvider).topicTextColor,
-            ),
-          ),
+        Text(
+          label,
+          style: textStyleGeneral(_theme),
         ),
         const Gap(24),
         DrawerDropDownButton(value, onChanged),

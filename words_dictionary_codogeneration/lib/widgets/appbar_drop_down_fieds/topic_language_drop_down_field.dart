@@ -9,11 +9,13 @@ part 'topic_language_drop_down_field.g.dart';
 
 @cwidget
 Widget _topicLanguageDropDownField(WidgetRef ref) {
+  final _language = ref.watch(topicLanguageFiltersProvider).topicLanguage;
+
   return Row(
     children: [
       const SizedBox(width: 24),
       DropdownButton<Language>(
-        value: ref.watch(topicLanguageFiltersProvider).topicLanguage,
+        value: _language,
         elevation: 16,
         underline: const SizedBox(), //DropdownButtonHideUnderline
         onChanged: (Language? newValue) {

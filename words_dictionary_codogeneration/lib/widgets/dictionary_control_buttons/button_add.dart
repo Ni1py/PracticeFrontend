@@ -11,12 +11,15 @@ part 'button_add.g.dart';
 
 @cwidget
 Widget _buttonAdd(BuildContext context, WidgetRef ref) {
+  final _theme = ref.watch(topicThemeProvider);
+  final _language = ref.watch(topicLanguageFiltersProvider).topicLanguage;
+
   return Center(
     child: Padding(
       padding: const EdgeInsets.only(right: 10),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: ref.watch(topicThemeProvider).topicButtonColor,
+          primary: _theme.topicButtonColor,
         ),
         onPressed: () {
           showDialog(
@@ -27,11 +30,9 @@ Widget _buttonAdd(BuildContext context, WidgetRef ref) {
           );
         },
         child: Text(
-          topicAddButtonText.translations[
-                  ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-              '',
+          topicAddButtonText.translations[_language] ?? '',
           style: textStyleGeneral(
-            ref.watch(topicThemeProvider).topicButtonTextColor,
+            _theme.topicButtonTextColor,
           ),
         ),
       ),

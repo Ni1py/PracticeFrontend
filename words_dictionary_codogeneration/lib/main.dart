@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:functional_widget_annotation/functional_widget_annotation.dart';
-import 'package:words_dictionary_codogeneration/adaptive_scaffold.dart';
-import 'package:words_dictionary_codogeneration/providers/display_mode_provider.dart';
+import 'package:words_dictionary_codogeneration/scaffold.dart' as scaffold;
 
 part 'main.g.dart';
 
@@ -14,6 +13,6 @@ Widget _wordDictionaryApp(BuildContext context) => MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const DisplayModeScope(child: AdaptiveScaffold()),
+      home: scaffold.Scaffold(),
       debugShowCheckedModeBanner: false,
     );

@@ -18,19 +18,18 @@ class TopicLanguageFiltersNotifier
       : super(const TopicLanguageFiltersModel(Language.russian, languageRu));
 
   void topicLanguage(Language value) {
-    final topicLanguage = value;
-    List<String> topicLanguages = [];
+    List<String> _topicLanguages = [];
     if (value == Language.russian) {
-      topicLanguages = languageRu;
+      _topicLanguages = languageRu;
     } else if (value == Language.english) {
-      topicLanguages = languageEn;
+      _topicLanguages = languageEn;
     } else if (value == Language.french) {
-      topicLanguages = languageFr;
+      _topicLanguages = languageFr;
     } else if (value == Language.german) {
-      topicLanguages = languageGe;
+      _topicLanguages = languageGe;
     }
 
-    state = TopicLanguageFiltersModel(topicLanguage, topicLanguages);
+    state = TopicLanguageFiltersModel(value, _topicLanguages);
   }
 }
 

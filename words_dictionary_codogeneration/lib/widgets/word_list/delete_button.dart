@@ -10,13 +10,15 @@ part 'delete_button.g.dart';
 
 @cwidget
 Widget _deleteButton(WidgetRef ref, Word word) {
+  final _theme = ref.watch(topicThemeProvider).topicTextColor;
+
   return IconButton(
     onPressed: () {
       ref.read(printProvider.notifier).removeWord(word.id);
       ref.read(wordAddingProvider.notifier).deleteWord(word.id);
     },
     icon: Icon(Icons.cancel_sharp),
-    color: ref.watch(topicThemeProvider).topicTextColor,
+    color: _theme,
     //splashColor: Color.fromARGB(255, 12, 184, 135), - должно менять цвет при нажатии но не работает
   );
 }

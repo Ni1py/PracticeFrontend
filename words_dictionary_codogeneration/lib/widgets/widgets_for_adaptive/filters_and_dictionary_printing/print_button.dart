@@ -13,25 +13,24 @@ part 'print_button.g.dart';
 
 @cwidget
 Widget _printButton(WidgetRef ref) {
-  final wordIds = ref.watch(printProvider).wordIds;
-  final wordsLength = wordIds.length;
-  final wordsLengthString = wordsLength == 0
+  final _wordIds = ref.watch(printProvider).wordIds;
+  final _theme = ref.watch(topicThemeProvider).topicTextColor;
+  final _language = ref.watch(topicLanguageFiltersProvider).topicLanguage;
+  final _languageFiltersModel = ref.watch(languageFiltersProvider);
+  final _words = ref.watch(wordAddingProvider).words;
+  final _wordsLength = _wordIds.length;
+  final _wordsLengthString = _wordsLength == 0
       ? ''
-      : ' $wordsLength ${topicText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}';
+      : ' $_wordsLength ${topicText.translations[_language]}';
 
   return TextButton(
     style: TextButton.styleFrom(
-      primary: ref.watch(topicThemeProvider).topicTextColor,
+      primary: _theme,
       textStyle: textStyleGeneral(null),
     ),
-    onPressed: () => ((wordsLength == 0)
+    onPressed: () => ((_wordsLength == 0)
         ? null
-        : ref.watch(printProvider).printWords(
-              ref.watch(languageFiltersProvider),
-              ref.watch(wordAddingProvider).words,
-            )),
-    child: Text(
-      '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString',
-    ),
+        : ref.read(printProvider).printWords(_languageFiltersModel, _words)),
+    child: Text('${topicPrintText.translations[_language]}$_wordsLengthString'),
   );
 }

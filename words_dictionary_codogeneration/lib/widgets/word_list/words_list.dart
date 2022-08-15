@@ -12,36 +12,28 @@ part 'words_list.g.dart';
 
 @cwidget
 Widget _wordsList(WidgetRef ref) {
+  final _words = ref.watch(wordAddingProvider).words;
+  final _theme = ref.watch(topicThemeProvider);
+
   return Expanded(
     child: ListView.builder(
       shrinkWrap: true,
-      itemCount: ref.watch(wordAddingProvider).words.length,
+      itemCount: _words.length,
       itemBuilder: (_, index) {
-        final word = ref.watch(wordAddingProvider).words[index];
+        final _word = _words[index];
 
         return Row(
           children: [
             Expanded(
               flex: 6,
-              child: NativeLanguageWord(
-                word,
-                ref.watch(topicThemeProvider).topicTextColor,
-              ),
+              child: NativeLanguageWord(_word, _theme.topicTextColor),
             ),
             Expanded(
               flex: 6,
-              child: StudiedLanguageWord(
-                word,
-                ref.watch(topicThemeProvider).topicTextColor,
-              ),
+              child: StudiedLanguageWord(_word, _theme.topicTextColor),
             ),
-            Expanded(
-              flex: 1,
-              child: WordCheckbox(word, ref.watch(topicThemeProvider)),
-            ),
-            Expanded(
-              child: DeleteButton(word),
-            ),
+            Expanded(flex: 1, child: WordCheckbox(_word, _theme)),
+            Expanded(child: DeleteButton(_word)),
           ],
         );
       },

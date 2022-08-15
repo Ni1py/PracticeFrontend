@@ -11,29 +11,20 @@ part 'translation_entry_fields.g.dart';
 Widget _translationEntryFields(
   ValueNotifier<Map<Language, String>> translations,
 ) {
+  Function(String)? addWord(Language language) {
+    return ((String text) => translations.value[language] = text);
+  }
+
   return Column(
     mainAxisSize: MainAxisSize.min,
     children: [
-      TranslationFormTextField(
-        topicInputRuText,
-        ((String text) =>
-            translations.value.update(Language.russian, (value) => text)),
-      ),
+      TranslationFormTextField(topicInputRuText, addWord(Language.russian)),
       const Gap(20),
-      TranslationFormTextField(
-        topicInputEnText,
-        ((String text) => translations.value[Language.english] = text),
-      ),
+      TranslationFormTextField(topicInputEnText, addWord(Language.english)),
       const Gap(20),
-      TranslationFormTextField(
-        topicInputGeText,
-        ((String text) => translations.value[Language.german] = text),
-      ),
+      TranslationFormTextField(topicInputGeText, addWord(Language.german)),
       const Gap(20),
-      TranslationFormTextField(
-        topicInputFrText,
-        ((String text) => translations.value[Language.french] = text),
-      ),
+      TranslationFormTextField(topicInputFrText, addWord(Language.french)),
     ],
   );
 }

@@ -5,10 +5,10 @@ import 'package:words_dictionary_codogeneration/widgets/drawer/print_button.dart
 import 'package:words_dictionary_codogeneration/widgets/drawer/translation_language_drop_down_field.dart';
 import 'package:words_dictionary_codogeneration/widgets/drawer/word_language_drop_down_field.dart';
 
-part 'column_filters_and_dictionary_printing.g.dart';
+part 'filters_and_dictionary_printing.g.dart';
 
 @swidget
-Widget _columnFiltersAndDictionaryPrinting() {
+Widget _filtersAndDictionaryPrinting() {
   return Center(
     child: Column(
       mainAxisSize: MainAxisSize.min,

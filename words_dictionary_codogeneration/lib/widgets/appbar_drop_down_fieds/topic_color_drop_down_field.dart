@@ -9,11 +9,13 @@ part 'topic_color_drop_down_field.g.dart';
 
 @cwidget
 Widget _topicColorDropDownField(WidgetRef ref) {
+  final _theme = ref.watch(topicThemeProvider).topicTheme;
+
   return Row(
     children: [
       const SizedBox(width: 24),
       DropdownButton<TopicTheme>(
-        value: ref.watch(topicThemeProvider).topicTheme,
+        value: _theme,
         elevation: 16,
         underline: const SizedBox(), //DropdownButtonHideUnderline
         onChanged: (TopicTheme? newValue) {

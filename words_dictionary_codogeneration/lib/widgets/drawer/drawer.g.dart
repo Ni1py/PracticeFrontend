@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'adaptive_home_page.dart';
+part of 'drawer.dart';
 
 // **************************************************************************
 // FunctionalWidgetGenerator
 // **************************************************************************
 
-class AdaptiveHomePage extends StatelessWidget {
-  const AdaptiveHomePage({Key? key}) : super(key: key);
+class Drawer extends ConsumerWidget {
+  const Drawer({material.Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext _context) => _adaptiveHomePage(_context);
+  material.Widget build(material.BuildContext _context, WidgetRef _ref) => _drawer(_ref);
 }

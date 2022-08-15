@@ -13,6 +13,8 @@ Widget _drawerDropDownButton(
   Language value,
   ValueChanged<Language> onChanged,
 ) {
+  final _language = ref.watch(topicLanguageFiltersProvider).topicLanguages;
+
   return DropdownButton<Language>(
     value: value,
     icon: const Icon(Icons.arrow_downward),
@@ -32,9 +34,7 @@ Widget _drawerDropDownButton(
     items: Language.values
         .map((Language value) => DropdownMenuItem<Language>(
               value: value,
-              child: Text(ref
-                  .watch(topicLanguageFiltersProvider)
-                  .topicLanguages[value.index]),
+              child: Text(_language[value.index]),
             ))
         .toList(),
   );

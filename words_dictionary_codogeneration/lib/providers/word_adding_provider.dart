@@ -14,18 +14,18 @@ class WordAddingNotifier extends StateNotifier<WordAddingModel> {
   WordAddingNotifier() : super(WordAddingModel(getWords()));
 
   int _getMaxId() {
-    return (state._words.map((word) => word.id).toList())
+    return state._words
+        .map((word) => word.id)
         .reduce((value, element) => value > element ? value : element);
   }
 
-  String _isMapElementEmpty(Map<Language, String> translations) {
-    return translations.values
-        .toList()
-        .reduce((value, element) => value.isEmpty ? 'true' : 'false');
+  bool _isMapElementEmpty(Map<Language, String> translations) {
+    return Language.values
+        .every((language) => translations.containsKey(language)); //.every(каждый), .any(хотя бы 1)
   }
 
   void addWord(Map<Language, String> translations) {
-    if (_isMapElementEmpty(translations) == 'false') {
+    if (_isMapElementEmpty(translations)) {
       state = WordAddingModel([
         ...state._words,
         Word(

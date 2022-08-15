@@ -13,12 +13,14 @@ Widget _wordCheckbox(
   Word word,
   TopicThemeFiltersModel modelTopicColor,
 ) {
+  final _wordIds = ref.watch(printProvider).wordIds;
+
   return Checkbox(
     checkColor: modelTopicColor.topicColor,
     fillColor: MaterialStateProperty.resolveWith<Color>(
       (states) => modelTopicColor.topicTextColor,
     ),
-    value: ref.watch(printProvider).wordIds.contains(word.id),
+    value: _wordIds.contains(word.id),
     onChanged: (value) => ((value ?? false)
         ? ref.read(printProvider.notifier).addWord
         : ref.read(printProvider.notifier).removeWord)(word.id),

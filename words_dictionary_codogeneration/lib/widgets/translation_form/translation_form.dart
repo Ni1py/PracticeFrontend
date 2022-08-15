@@ -14,38 +14,29 @@ part 'translation_form.g.dart';
 
 @hcwidget
 Widget _translationForm(BuildContext context, WidgetRef ref) {
-  final translations = useState({Language.russian: ''});
+  final ValueNotifier<Map<Language, String>> _translations = useState({});
+  final _theme = ref.watch(topicThemeProvider);
+  final _language = ref.watch(topicLanguageFiltersProvider).topicLanguage;
 
   return AlertDialog(
-    backgroundColor: ref.watch(topicThemeProvider).topicBackgroundColor,
-    titleTextStyle: TextStyle(
-      fontSize: fontSize,
-      color: ref.watch(topicThemeProvider).topicTextColor,
-    ),
-    title: Text(topicDialogTitleText.translations[
-            ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-        ''),
-    content: TranslationEntryFields(translations),
+    backgroundColor: _theme.topicBackgroundColor,
+    titleTextStyle: TextStyle(fontSize: fontSize, color: _theme.topicTextColor),
+    title: Text(topicDialogTitleText.translations[_language] ?? ''),
+    content: TranslationEntryFields(_translations),
     actions: [
       TextButton(
         child: const Text('OK'),
         onPressed: () => {
           Navigator.pop(context, 'OK'),
-          ref.read(wordAddingProvider.notifier).addWord(translations.value),
+          ref.read(wordAddingProvider.notifier).addWord(_translations.value),
         },
       ),
       TextButton(
-        child: Text(topicCancelButtonText.translations[
-                ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-            ''),
-        onPressed: () => {
-          Navigator.pop(
-            context,
-            topicCancelButtonText.translations[
-                    ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-                '',
-          ),
-        },
+        child: Text(topicCancelButtonText.translations[_language] ?? ''),
+        onPressed: () => Navigator.pop(
+          context,
+          topicCancelButtonText.translations[_language] ?? '',
+        ),
       ),
     ],
   );

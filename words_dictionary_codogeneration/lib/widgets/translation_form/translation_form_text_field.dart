@@ -4,6 +4,7 @@ import 'package:functional_widget_annotation/functional_widget_annotation.dart';
 import 'package:words_dictionary_codogeneration/data/word.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_language_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
+import 'package:words_dictionary_codogeneration/styles/outline_input_border.dart';
 
 part 'translation_form_text_field.g.dart';
 
@@ -13,26 +14,18 @@ Widget _translationFormTextField(
   Word hintContent,
   Function(String)? onChanged,
 ) {
+  final _topicTextColor = ref.watch(topicThemeProvider).topicTextColor;
+  final _topicColor = ref.watch(topicThemeProvider).topicColor;
+  final _language = ref.watch(topicLanguageFiltersProvider).topicLanguage;
+
   return TextField(
-    style: TextStyle(color: ref.watch(topicThemeProvider).topicTextColor),
+    style: TextStyle(color: _topicTextColor),
     decoration: InputDecoration(
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: ref.watch(topicThemeProvider).topicTextColor,
-          width: 1,
-        ),
-      ),
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: ref.watch(topicThemeProvider).topicTextColor,
-          width: 1,
-        ),
-      ),
-      hintText: hintContent.translations[
-              ref.watch(topicLanguageFiltersProvider).topicLanguage] ??
-          '',
-      hintStyle: TextStyle(color: ref.watch(topicThemeProvider).topicTextColor),
-      fillColor: ref.watch(topicThemeProvider).topicColor,
+      focusedBorder: outlineInputBorder(_topicTextColor),
+      enabledBorder: outlineInputBorder(_topicTextColor),
+      hintText: hintContent.translations[_language] ?? '',
+      hintStyle: TextStyle(color: _topicTextColor),
+      fillColor: _topicColor,
       filled: true,
     ),
     onChanged: onChanged,

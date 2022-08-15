@@ -8,37 +8,37 @@ import 'package:words_dictionary_codogeneration/providers/topic_language_filters
 import 'package:words_dictionary_codogeneration/providers/topic_theme_filters_provider.dart';
 import 'package:words_dictionary_codogeneration/providers/word_adding_provider.dart';
 import 'package:words_dictionary_codogeneration/styles/drawer_box_decoration.dart';
-import 'package:words_dictionary_codogeneration/styles/style.dart';
 import 'package:words_dictionary_codogeneration/styles/text_style_general.dart';
 
 part 'print_button.g.dart';
 
 @cwidget
 Widget _printButton(BuildContext context, WidgetRef ref) {
-  final wordIds = ref.watch(printProvider).wordIds;
-  final wordsLength = wordIds.length;
-  final wordsLengthString = wordsLength == 0
+  final _wordIds = ref.watch(printProvider).wordIds;
+  final _words = ref.read(wordAddingProvider).words;
+  final _languageFiltersModel = ref.read(languageFiltersProvider);
+  final _topicLanguage = ref.watch(topicLanguageFiltersProvider).topicLanguage;
+  final _theme = ref.watch(topicThemeProvider).topicTextColor;
+  final _wordsLength = _wordIds.length;
+  final _wordsLengthString = _wordsLength == 0
       ? ''
-      : ' $wordsLength ${topicText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}';
+      : ' $_wordsLength ${topicText.translations[_topicLanguage]}';
 
-  return Container(
+  return DecoratedBox(
     decoration: drawerBoxDecoration(),
     child: TextButton(
       style: TextButton.styleFrom(
-        primary: ref.watch(topicThemeProvider).topicTextColor,
+        primary: _theme,
         textStyle: textStyleGeneral(null),
       ),
       onPressed: () {
-        (wordsLength == 0)
+        (_wordsLength == 0)
             ? null
-            : ref.read(printProvider).printWords(
-                  ref.read(languageFiltersProvider),
-                  ref.read(wordAddingProvider).words,
-                );
+            : ref.read(printProvider).printWords(_languageFiltersModel, _words);
         Navigator.pop(context);
       },
       child: Text(
-        '${topicPrintText.translations[ref.watch(topicLanguageFiltersProvider).topicLanguage]}$wordsLengthString',
+        '${topicPrintText.translations[_topicLanguage]}$_wordsLengthString',
       ),
     ),
   );
